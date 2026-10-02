@@ -1,0 +1,1224 @@
+/*
+ * Vue Dark — Typora 深色主题
+ */
+
+/* ==========================================================================
+ * 01. 主题变量
+ * ========================================================================== */
+
+:root {
+  /* 页面与正文配色。 */
+  --bg-color: #1a1a1a;
+  --text-color: #ffffffde;
+  --font-color: #ffffffde;
+  --vc-muted: #ebebeb99;
+  --vc-faint: #ebebeb61;
+  --vc-divider: #545454a6;
+  --vc-border: #5454547a;
+  --vc-soft: #242424;
+  --vc-mute: #2f2f2f;
+  --vc-inline-code: #aac8e4;
+  --vc-mark-bg: #594600;
+  --vc-mark-text: #ffe417;
+  --vc-green: #42b883;
+  --vc-green-hover: #42d392;
+  /* 弹出控件的选中底色：由品牌绿派生，并非原站变量。 */
+  --vc-green-soft: rgba(66, 184, 131, 0.1);
+
+  /* 代码块配色。 */
+  --vc-code-bg: #242424;
+  --vc-code-text: #e1e4e8;
+
+  /* 阅读宽度与字体。 */
+  --vc-content-width: 800px;
+  --vc-font:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Microsoft YaHei", Arial, sans-serif;
+  --monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+
+  /* Typora 控件与侧栏变量。 */
+  --primary-color: var(--vc-green);
+  --side-bar-bg-color: var(--bg-color);
+  --vc-sidebar-text: var(--text-color);
+  --vc-sidebar-active: transparent;
+  --vc-sidebar-hover: var(--vc-soft);
+  --control-text-color: var(--vc-muted);
+  --control-text-hover-color: var(--text-color);
+  --active-file-bg-color: var(--vc-sidebar-active);
+  --active-file-text-color: var(--vc-green);
+  --active-file-border-color: transparent;
+  --item-hover-bg-color: var(--vc-soft);
+  --item-hover-text-color: var(--text-color);
+  --select-text-bg-color: rgba(66, 184, 131, 0.2);
+  --select-text-font-color: var(--text-color);
+  --window-border: 1px solid var(--vc-border);
+  --rawblock-edit-panel-bd: var(--vc-soft);
+  --search-select-bg-color: #fff0b3;
+  --search-select-text-color: #213547;
+
+  /* 滚动条配色。 */
+  --scrollbar-color: rgba(235, 235, 235, 0.24);
+  --scrollbar-hover: rgba(235, 235, 235, 0.4);
+  --scrollbar-active: rgba(235, 235, 235, 0.55);
+}
+
+/* ==========================================================================
+ * 02. 基础排版
+ * ========================================================================== */
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  font-family: var(--vc-font);
+  color: var(--text-color);
+  background: var(--bg-color);
+  line-height: 1.8;
+}
+
+::selection {
+  color: var(--text-color);
+  background: var(--select-text-bg-color);
+}
+
+/* ==========================================================================
+ * 03. 正文元素
+ * ========================================================================== */
+
+/* 阅读区域的最大宽度包含左右内边距。 */
+#write {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--vc-content-width);
+  margin: 0 auto;
+  padding: 52px 40px 120px;
+  overflow-wrap: break-word;
+  caret-color: var(--vc-green);
+}
+
+#write p {
+  margin: 18px 0;
+  line-height: 1.8;
+}
+
+#write h1,
+#write h2,
+#write h3,
+#write h4,
+#write h5,
+#write h6 {
+  color: var(--text-color);
+  font-family: var(--vc-font);
+  font-weight: 600;
+  line-height: 1.45;
+  margin: 32px 0 16px;
+  padding: 0;
+}
+
+#write h1 {
+  font-size: 2.125rem;
+  line-height: 1.35;
+  margin: 0 0 28px;
+  letter-spacing: -0.025em;
+}
+
+#write h2 {
+  font-size: 1.5rem;
+  border-top: 1px solid var(--vc-border);
+  margin-top: 48px;
+  padding-top: 24px;
+}
+
+#write h3 {
+  font-size: 1.25rem;
+}
+
+#write h4 {
+  font-size: 1.125rem;
+}
+
+#write h5 {
+  font-size: 1rem;
+}
+
+#write h6 {
+  font-size: 0.9375rem;
+  color: var(--vc-muted);
+}
+
+#write > :first-child {
+  margin-top: 0;
+}
+
+#write > h2:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+#write h2 + h3,
+#write h3 + h4,
+#write h4 + h5,
+#write h5 + h6 {
+  margin-top: 22px;
+}
+
+#write strong {
+  font-weight: 600;
+}
+
+#write a {
+  color: var(--vc-green);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+#write a:hover {
+  color: var(--vc-green-hover);
+  text-decoration: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--vc-green);
+  outline-offset: 3px;
+}
+
+#write ul,
+#write ol {
+  padding-left: 1.5em;
+  margin: 16px 0;
+}
+
+#write li {
+  margin: 6px 0;
+}
+
+#write li > p {
+  margin: 8px 0;
+}
+
+#write li > ul,
+#write li > ol {
+  margin: 4px 0;
+}
+
+#write li::marker {
+  color: var(--text-color);
+}
+
+#write .md-task-list-item > input {
+  accent-color: var(--vc-green);
+}
+
+#write .md-task-list-item.task-list-done > p {
+  color: var(--vc-muted);
+  text-decoration: line-through;
+}
+
+/* 引用、分隔线与文本标记。 */
+#write blockquote {
+  margin: 24px 0;
+  padding: 14px 20px;
+  color: var(--vc-muted);
+  background: var(--vc-soft);
+  border-left: 3px solid var(--vc-divider);
+  border-radius: 0 8px 8px 0;
+}
+
+#write blockquote > :first-child {
+  margin-top: 0;
+}
+
+#write blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+#write blockquote blockquote {
+  background: var(--vc-mute);
+  margin: 12px 0;
+}
+
+#write hr {
+  border: 0;
+  border-top: 1px solid var(--vc-border);
+  margin: 36px 0;
+}
+
+#write mark {
+  color: var(--vc-mark-text);
+  background: var(--vc-mark-bg);
+  padding: 1px 3px;
+  border-radius: 3px;
+}
+
+#write del {
+  color: var(--vc-muted);
+}
+
+#write kbd {
+  font: 0.85em var(--monospace);
+  padding: 2px 6px;
+  border: 1px solid var(--vc-divider);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  background: var(--vc-soft);
+}
+
+/* 表格、图片、目录与脚注。 */
+#write table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 0.9375rem;
+}
+
+#write th,
+#write td {
+  padding: 10px 16px;
+  border: 1px solid var(--vc-divider);
+}
+
+#write th {
+  background: var(--vc-soft);
+  font-weight: 600;
+}
+
+#write tr:nth-child(even) td {
+  background: var(--vc-soft);
+}
+
+#write .md-table-resize-popover {
+  background: var(--vc-soft);
+}
+
+#write img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+#write .md-image > .md-meta {
+  color: var(--vc-muted);
+}
+
+#write .md-toc {
+  padding: 16px 20px;
+  background: var(--vc-soft);
+  border-radius: 8px;
+  font-size: 0.9375rem;
+}
+
+#write .md-toc a {
+  text-decoration: none;
+}
+
+#write .footnotes {
+  margin-top: 0;
+  border-top: none;
+  font-size: 0.875rem;
+  color: var(--vc-muted);
+}
+
+#write .md-def-name {
+  color: var(--vc-green);
+}
+
+/* ==========================================================================
+ * 04. 代码与图表
+ * ========================================================================== */
+
+/* 行内代码使用深灰底色；普通代码块使用次级深色背景，并排除图表与编辑器内部 pre。 */
+#write code,
+#write tt {
+  font-family: var(--monospace);
+  font-size: 0.875em;
+  color: var(--vc-inline-code);
+  background: var(--vc-mute);
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+#write a code {
+  color: var(--vc-green-hover);
+}
+
+#write .md-fences:not(.md-fences-advanced),
+#write
+  pre:not(.md-meta-block):not(.md-fences):not(.CodeMirror pre):not(
+    .md-fences-advanced pre
+  ) {
+  box-sizing: border-box;
+  margin: 22px 0;
+  padding: 20px 24px;
+  background: var(--vc-code-bg);
+  color: var(--vc-code-text);
+  border: 1px solid var(--vc-code-bg);
+  border-radius: 8px;
+  font: 0.875rem/1.75 var(--monospace);
+  overflow-wrap: normal;
+}
+
+#write
+  pre:not(.md-meta-block):not(.md-fences):not(.CodeMirror pre):not(
+    .md-fences-advanced pre
+  ) {
+  overflow-x: auto;
+}
+
+#write pre code {
+  font-size: inherit;
+  color: inherit;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+#write .md-fences .CodeMirror {
+  color: var(--vc-code-text);
+  background: transparent;
+  font: inherit;
+}
+
+#write .md-fences .CodeMirror pre {
+  margin: 0;
+  padding: 0 4px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font: inherit;
+}
+
+#write .md-fences .CodeMirror-gutters {
+  background: transparent;
+  border-right: 1px solid #444d56;
+}
+
+#write .md-fences .CodeMirror-linenumber {
+  color: #959da5;
+  padding-right: 12px;
+}
+
+#write .md-fences .CodeMirror-cursor {
+  border-left-color: #e1e4e8;
+}
+
+#write .md-fences .CodeMirror-selected {
+  background: #414b57;
+}
+
+/* 编辑器内层背景透明，避免出现灰条；文字选区保留独立高亮。 */
+#write .md-fences .CodeMirror-scroll,
+#write .md-fences .CodeMirror-sizer,
+#write .md-fences .CodeMirror-lines,
+#write .md-fences .CodeMirror-code,
+#write .md-fences .CodeMirror-activeline-background,
+#write .md-fences .CodeMirror-linebackground {
+  background: transparent;
+}
+
+#write .md-fences .CodeMirror-lines {
+  padding: 0;
+}
+
+#write .md-fences ::selection {
+  color: #fff;
+  background: #414b57;
+}
+
+/* CodeMirror 语法高亮：保留当前配色。 */
+#write .md-fences .cm-comment {
+  color: #a0a9b4;
+}
+
+#write .md-fences .cm-keyword,
+#write .md-fences .cm-operator {
+  color: #f97583;
+}
+
+#write .md-fences .cm-string,
+#write .md-fences .cm-string-2 {
+  color: #9ecbff;
+}
+
+#write .md-fences .cm-number,
+#write .md-fences .cm-atom {
+  color: #79b8ff;
+}
+
+#write .md-fences .cm-def,
+#write .md-fences .cm-variable-2 {
+  color: #b392f0;
+}
+
+#write .md-fences .cm-variable,
+#write .md-fences .cm-property {
+  color: #e1e4e8;
+}
+
+#write .md-fences .cm-tag {
+  color: #85e89d;
+}
+
+#write .md-fences .cm-attribute,
+#write .md-fences .cm-builtin {
+  color: #ffab70;
+}
+
+#write .md-fences .cm-meta {
+  color: #c8e1ff;
+}
+
+#write .md-fences .cm-error {
+  color: #fdaeb7;
+}
+
+#write .md-fences .code-tooltip {
+  color: var(--vc-muted);
+  background: var(--vc-soft);
+  border: 1px solid var(--vc-border);
+  border-radius: 5px;
+}
+
+#write .md-fences .code-tooltip input {
+  color: var(--text-color);
+  background: var(--vc-soft);
+}
+
+/*
+ * Typora 的高级围栏承载 Mermaid、时序图和流程图。
+ * 图表预览保留独立浅色画布，兼容默认 SVG 深色文字与连线；源码编辑区使用深底。
+ */
+#write .md-fences.md-fences-advanced {
+  margin: 22px 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: #ffffff;
+  color: #213547;
+  font-family: var(--vc-font);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+#write .md-fences-advanced .md-fences-adv-panel,
+#write .md-fences-advanced .md-diagram-panel,
+#write .md-fences-advanced .md-diagram-panel-preview {
+  background: #ffffff;
+  color: #213547;
+}
+
+#write .md-fences.md-fences-advanced .CodeMirror {
+  background: var(--vc-code-bg);
+  color: var(--vc-code-text);
+  padding: 16px 20px;
+  border-radius: 8px;
+  font: 0.875rem/1.75 var(--monospace);
+}
+
+#write .md-meta-block {
+  color: var(--vc-muted);
+  background: var(--vc-soft);
+  padding: 16px 20px;
+  border-radius: 6px;
+  font: 0.875rem/1.7 var(--monospace);
+}
+
+.md-inline-math,
+.md-math-block {
+  color: var(--text-color);
+}
+
+.md-rawblock-control,
+.md-rawblock-tooltip {
+  background: var(--vc-soft);
+  color: var(--vc-muted);
+}
+
+/* ==========================================================================
+ * 05. 侧栏
+ * ========================================================================== */
+
+/* 文件树沿用 Notion Like 的布局，配色与标签保持 Vue 风格。 */
+#typora-sidebar {
+  background: var(--side-bar-bg-color);
+  border-right: 1px solid var(--vc-border);
+  color: var(--vc-sidebar-text);
+  font-family: var(--vc-font);
+}
+
+/*
+ * 侧栏标签：文件、大纲、搜索与返回共用 .info-panel-tab-wrapper。
+ * 不为 .info-panel-tab 强制设置 display: flex !important，避免覆盖搜索标签的隐藏规则。
+ */
+
+.info-panel-tab-wrapper {
+  position: relative;
+  display: flex !important;
+  align-items: center;
+  justify-content: stretch;
+  gap: 3px;
+  width: auto;
+  height: 36px !important;
+  min-height: 36px !important;
+  margin: 10px 12px 8px !important;
+  padding: 0 !important;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--vc-border);
+  border-radius: 0;
+  box-sizing: border-box;
+  -webkit-app-region: no-drag;
+  overflow: hidden;
+}
+
+.info-panel-tab-wrapper > div[style*="flex"] {
+  display: none !important;
+  width: 0 !important;
+  flex: 0 0 0 !important;
+}
+
+.sidebar-tabs {
+  display: contents !important;
+  border: none;
+  background: transparent;
+  height: auto;
+}
+
+/* 保留 Typora 搜索模式下对额外标签的默认隐藏。 */
+#info-panel-tab-search,
+#info-panel-tab-search-back {
+  display: none !important;
+}
+
+.ty-show-search .info-panel-tab {
+  display: none !important;
+}
+
+.ty-show-search #info-panel-tab-search,
+.ty-show-search #info-panel-tab-search-back {
+  display: flex !important;
+}
+
+/* 覆盖 Typora .info-panel-tab 的 margin-top（18px / 原生窗口 12px）。 */
+.info-panel-tab,
+.native-window .info-panel-tab,
+.os-windows .info-panel-tab {
+  position: relative;
+  z-index: 1;
+  float: none !important;
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto !important;
+  min-width: 0;
+  height: 36px !important;
+  margin: 0 !important;
+  margin-top: 0 !important;
+  padding: 0 6px !important;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--vc-muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1 !important;
+  opacity: 1;
+  text-align: center;
+  box-shadow: none;
+  -webkit-app-region: no-drag;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.info-panel-tab .info-panel-tab-border {
+  display: none !important;
+  height: 0 !important;
+  background: transparent;
+}
+
+.info-panel-tab-title {
+  display: block !important;
+  width: auto;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  padding-bottom: 0 !important;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 1 !important;
+  transform: none !important;
+  bottom: auto !important;
+  position: static !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-app-region: no-drag;
+}
+
+.info-panel-tab:hover {
+  color: var(--vc-sidebar-text);
+  background: var(--vc-sidebar-hover);
+}
+
+.active-tab-files #info-panel-tab-file,
+.active-tab-outline #info-panel-tab-outline,
+.active-tab-files #info-panel-tab-file:hover,
+.active-tab-outline #info-panel-tab-outline:hover,
+.ty-show-search #info-panel-tab-search,
+.ty-show-search #info-panel-tab-search:hover {
+  color: var(--vc-green);
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  box-shadow: inset 0 -2px 0 var(--vc-green);
+}
+
+.ty-show-search #info-panel-tab-search-back {
+  color: var(--vc-muted);
+  font-weight: 500;
+  background: transparent;
+  box-shadow: none;
+}
+
+.ty-show-search #info-panel-tab-search-back:hover {
+  color: var(--vc-sidebar-text);
+  background: var(--vc-sidebar-hover);
+}
+
+#sidebar-loading-template,
+#sidebar-loading-template .sidebar-loading {
+  background: var(--side-bar-bg-color);
+}
+
+/* 文件列表。 */
+.file-list-item {
+  border-bottom: none;
+  color: var(--vc-sidebar-text);
+  border-radius: 8px;
+  margin: 1px 6px;
+}
+
+.file-list-item:hover {
+  background: var(--vc-sidebar-hover);
+}
+
+.file-list-item.active {
+  background: var(--vc-sidebar-active);
+  color: var(--vc-green);
+  font-weight: 600;
+}
+
+.file-list-item.active:hover {
+  background: var(--vc-sidebar-hover);
+}
+
+.file-list-item.active .file-list-item-file-name {
+  font-weight: 600;
+}
+
+.file-list-item-file-name {
+  font-weight: 500;
+  font-size: 0.92rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.file-list-item-summary {
+  font-size: 0.8rem;
+}
+
+.file-list-item-file-ext-part {
+  opacity: 0.45;
+}
+
+/*
+ * 文件树：覆盖 Typora 的表格布局与横向滚动，防止长文件名撑开容器。
+ * !important 用于覆盖宿主布局；保留节点自身的层级缩进。
+ */
+
+#file-library {
+  width: 100%;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.use-file-tree-style #file-library-tree {
+  display: block !important;
+  width: 100%;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* 列表模式：隐藏文件树，只显示文档列表。 */
+#typora-sidebar:not(.use-file-tree-style) #file-library-tree {
+  display: none !important;
+}
+
+#file-library {
+  overflow-y: auto !important;
+}
+
+.active-tab-files .sidebar-content,
+#sidebar-content:hover #file-library,
+.sidebar-content {
+  overflow-x: hidden !important;
+}
+
+.file-tree-node,
+.file-library-node {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.file-node-content {
+  display: flex !important;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--vc-sidebar-text);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.55;
+  border-radius: 6px;
+  padding: 3px 8px 3px 6px;
+  padding-right: 8px;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.file-node-content .file-node-icon,
+.file-node-content .file-node-open-state {
+  flex: 0 0 auto;
+}
+
+#file-library-tree .fa-caret-down:before {
+  content: "\f107"; /* 向下箭头。 */
+}
+
+#file-library-tree .fa-caret-right:before {
+  content: "\f105"; /* 向右箭头。 */
+}
+
+#file-library-tree .fa-folder:before {
+  content: "\f114"; /* 空心文件夹图标。 */
+}
+
+.file-node-expanded > .file-node-content .fa-caret-down {
+  margin-left: 0;
+}
+
+/* 展开的目录使用打开的文件夹图标。 */
+.file-node-expanded > .file-node-content .fa-folder:before {
+  content: "\f115";
+}
+
+.file-node-open-state {
+  padding: 2px;
+  margin-right: 8px;
+}
+
+/* 文件节点不需要展开箭头，移除 Typora 保留的空占位。 */
+.file-library-node.file-library-file-node
+  > .file-node-content
+  > .file-node-open-state {
+  display: none !important;
+}
+
+/*
+ * 目录图标与展开箭头共用 16px 槽位，悬停切换时保持文字位置不变。
+ * 使用 inline-flex 居中字形；根节点和空目录保留文件夹图标。
+ */
+.file-library-node[data-is-directory="true"]
+  > .file-node-content
+  > .file-node-open-state,
+.file-library-node > .file-node-content > .file-node-icon {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 16px !important;
+  width: 16px !important;
+  min-width: 16px !important;
+  max-width: 16px !important;
+  height: 16px;
+  margin: 0 8px 0 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+  line-height: 1;
+  text-align: center;
+}
+
+/* 在共用图标槽内居中 Font Awesome 字形。 */
+.file-library-node[data-is-directory="true"]
+  > .file-node-content
+  > .file-node-open-state
+  .fa,
+.file-library-node[data-is-directory="true"]
+  > .file-node-content
+  > .file-node-icon.fa-folder:before {
+  width: 100%;
+  text-align: center;
+  line-height: 1;
+}
+
+/* 默认隐藏箭头，只显示文件夹图标。 */
+.file-library-node[data-is-directory="true"]
+  > .file-node-content
+  > .file-node-open-state {
+  display: none !important;
+}
+
+/* 悬停：在同一槽位显示箭头。 */
+.file-library-node:not(.file-node-root)[data-is-directory="true"]:not(
+    [data-has-sub="false"]
+  )
+  > .file-node-content:hover
+  > .file-node-open-state {
+  display: inline-flex !important;
+}
+
+/* 悬停：隐藏文件夹图标（根节点除外）。 */
+.file-library-node:not(.file-node-root)[data-is-directory="true"]:not(
+    [data-has-sub="false"]
+  )
+  > .file-node-content:hover
+  > .file-node-icon.fa-folder {
+  display: none !important;
+}
+
+/* 没有可显示子项的目录使用变淡的空心文件夹图标。 */
+.file-library-node:not(
+    .file-node-root
+  )[data-is-directory="true"][data-has-sub="false"]
+  > .file-node-content
+  > .file-node-icon.fa-folder:before {
+  content: "\f114";
+  opacity: 0.5;
+}
+
+/* 长文件名：单行省略号。 */
+.file-node-title,
+.allow-file-tree-scroll .file-node-title,
+.file-node-content > .file-node-title {
+  display: block !important;
+  flex: 1 1 0% !important;
+  width: 0 !important; /* 允许文件名收缩，使省略号生效。 */
+  min-width: 0 !important;
+  max-width: none !important;
+  overflow: hidden !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  word-break: keep-all;
+  word-wrap: normal;
+}
+
+.file-node-title-name-part,
+.file-node-title > .file-node-title-name-part {
+  display: inline !important;
+}
+
+.file-node-icon {
+  opacity: 0.65;
+  margin-right: 8px;
+}
+
+.file-node-title-ext-part {
+  display: none !important;
+}
+
+/* 清除 Typora 节点背景，仅高亮鼠标所在行。 */
+.file-tree-node:not(.file-node-root):hover > .file-node-background,
+.file-tree-node.active > .file-node-background {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.file-tree-node > .file-node-content:hover {
+  background: var(--vc-sidebar-hover);
+}
+
+.file-library-node.file-library-file-node.active > .file-node-content {
+  background: var(--vc-sidebar-active);
+  color: var(--vc-green);
+  font-weight: 600;
+}
+
+.file-library-node.file-library-file-node.active
+  > .file-node-content
+  .file-node-icon {
+  color: var(--vc-green);
+  opacity: 1;
+}
+
+/* 激活靠绿色与字重区分，悬停统一使用浅灰背景。 */
+.file-library-node.file-library-file-node.active > .file-node-content:hover {
+  background: var(--vc-sidebar-hover);
+}
+
+#file-library-tree > .file-tree-node.file-node-root > .file-node-content {
+  letter-spacing: 0.04em;
+  padding-top: 10px;
+  padding-bottom: 6px;
+}
+
+#file-library-tree > .file-tree-node.file-node-root > .file-node-content:hover {
+  background: transparent;
+}
+
+/* 大纲：保留宿主缩进，激活项通过绿色与字重区分。 */
+.outline-item {
+  color: var(--vc-sidebar-text);
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 4px;
+}
+
+.outline-item:hover {
+  background: var(--vc-sidebar-hover);
+}
+
+.outline-item.outline-item-active {
+  color: var(--vc-green);
+  background: var(--vc-sidebar-active);
+  font-weight: 600;
+}
+
+.outline-item.outline-item-active:hover {
+  background: var(--vc-sidebar-hover);
+}
+
+.outline-label {
+  color: inherit;
+}
+
+/* 侧栏底部与编辑器状态栏。 */
+#ty-sidebar-footer {
+  border-top: 1px solid var(--vc-border);
+  background: var(--side-bar-bg-color);
+}
+
+#footer,
+#footer-word-count {
+  color: var(--vc-muted);
+}
+
+/* ==========================================================================
+ * 06. 弹出控件
+ * ========================================================================== */
+
+#typora-quick-open {
+  background: var(--vc-soft);
+  color: var(--text-color);
+  border: 1px solid var(--vc-border);
+  border-radius: 8px;
+}
+
+#typora-quick-open .typora-quick-open-item.active {
+  background: var(--vc-green-soft);
+  color: var(--vc-green);
+}
+
+.dropdown-menu,
+.context-menu {
+  background: var(--vc-soft);
+  color: var(--text-color);
+  border: 1px solid var(--vc-border);
+  border-radius: 6px;
+}
+
+.dropdown-menu > li > a:hover {
+  background: var(--vc-green-soft);
+  color: var(--vc-green);
+}
+
+/* ==========================================================================
+ * 07. 滚动条
+ * ========================================================================== */
+
+/*
+ * 透明边距使滑块与内容边缘分离。
+ * 标准滚动条属性保留 auto，避免新版 Chromium 覆盖 WebKit 圆角样式。
+ */
+@media screen {
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: auto;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    min-height: 12px;
+    min-width: 12px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background-color: var(--scrollbar-color);
+    background-clip: padding-box;
+    box-shadow: none;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-hover);
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    background-color: var(--scrollbar-active);
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  #typora-sidebar ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* 图表预览沿用浅色滚动条，仅深色代码和图表源码编辑区使用浅色滑块。 */
+  #write .md-fences:not(.md-fences-advanced),
+  #write .md-fences-advanced .CodeMirror,
+  #write
+    pre:not(.md-meta-block):not(.md-fences):not(.CodeMirror pre):not(
+      .md-fences-advanced pre
+    ) {
+    --scrollbar-color: rgba(235, 235, 235, 0.24);
+    --scrollbar-hover: rgba(235, 235, 235, 0.4);
+    --scrollbar-active: rgba(235, 235, 235, 0.55);
+  }
+
+  #write .md-fences .CodeMirror-scrollbar-filler,
+  #write .md-fences .CodeMirror-gutter-filler {
+    background: transparent;
+  }
+}
+
+/* ==========================================================================
+ * 08. 响应式布局
+ * ========================================================================== */
+
+@media screen and (max-width: 800px) {
+  #write {
+    padding: 32px 24px 80px;
+  }
+
+  #write h1 {
+    font-size: 1.875rem;
+  }
+
+  #write h2 {
+    margin-top: 36px;
+    padding-top: 20px;
+  }
+
+  #write .md-fences:not(.md-fences-advanced),
+  #write
+    pre:not(.md-meta-block):not(.md-fences):not(.CodeMirror pre):not(
+      .md-fences-advanced pre
+    ) {
+    padding: 16px;
+  }
+}
+
+/* ==========================================================================
+ * 09. 打印样式
+ * ========================================================================== */
+
+@media print {
+  :root {
+    --bg-color: #ffffff;
+    --font-color: #222;
+    --vc-soft: #f9f9f9;
+    --vc-mute: #f1f1f1;
+    --vc-inline-code: #476582;
+    --vc-mark-bg: #fff1b8;
+    --vc-mark-text: #574710;
+    --vc-divider: #3c3c3c4a;
+    --vc-border: #3c3c3c1f;
+    --vc-faint: #3c3c3c54;
+    --text-color: #222;
+    --vc-muted: #555;
+    --vc-code-bg: #f6f6f7;
+    --vc-code-text: #222;
+  }
+
+  #write {
+    max-width: none;
+    padding: 0;
+  }
+
+  #write h1,
+  #write h2,
+  #write h3,
+  #write h4 {
+    break-after: avoid;
+  }
+
+  #write h2 {
+    margin-top: 28px;
+    padding-top: 16px;
+  }
+
+  #write p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  #write table,
+  #write blockquote,
+  #write img {
+    break-inside: avoid;
+  }
+
+  #write .md-fences:not(.md-fences-advanced),
+  #write
+    pre:not(.md-meta-block):not(.md-fences):not(.CodeMirror pre):not(
+      .md-fences-advanced pre
+    ) {
+    border-color: #ddd;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  #write .md-fences [class*="cm-"] {
+    color: #222;
+  }
+
+  #write a {
+    color: #236a4c;
+  }
+}
