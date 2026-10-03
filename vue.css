@@ -391,6 +391,17 @@ body {
   border-radius: 0;
 }
 
+/* Typora 对选区背景和文字层使用 !important，并读取这两个变量。
+ * 在代码区覆盖变量：避免继承正文绿底/深色字，以及半透明选区叠加。 */
+#write .md-fences,
+#write
+  pre:not(.md-meta-block):not(.md-fences):not(.CodeMirror pre):not(
+    .md-fences-advanced pre
+  ) {
+  --select-text-bg-color: var(--vc-code-selection);
+  --select-text-font-color: var(--vc-code-text);
+}
+
 #write .md-fences .CodeMirror {
   color: var(--vc-code-text);
   background: transparent;
@@ -439,7 +450,7 @@ body {
 }
 
 #write .md-fences ::selection {
-  color: #fff;
+  color: var(--vc-code-text);
   background: var(--vc-code-selection);
 }
 
