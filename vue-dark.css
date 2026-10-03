@@ -244,6 +244,8 @@ body {
   background: var(--vc-soft);
   border-left: 3px solid var(--vc-divider);
   border-radius: 0 8px 8px 0;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 #write blockquote > :first-child {
@@ -524,8 +526,6 @@ body {
 
 #write .md-fences .cm-error {
   background: transparent;
-  text-decoration: underline wavy;
-  text-underline-offset: 3px;
 }
 
 #write .md-fences .code-tooltip {
