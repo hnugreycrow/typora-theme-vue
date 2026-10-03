@@ -957,12 +957,11 @@ body {
   display: none !important;
 }
 
-/* 没有可显示子项的目录使用变淡的空心文件夹图标。 */
+/* 没有可显示子项的目录使用变淡的空心文件夹图标和文字。 */
 .file-library-node:not(
     .file-node-root
   )[data-is-directory="true"][data-has-sub="false"]
-  > .file-node-content
-  > .file-node-icon.fa-folder:before {
+  > .file-node-content {
   content: "\f114";
   opacity: 0.5;
 }
