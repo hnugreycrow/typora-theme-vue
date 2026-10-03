@@ -799,6 +799,7 @@ body {
   padding-right: 8px;
   box-sizing: border-box;
   white-space: nowrap;
+  transition: color .5s;
 }
 
 .file-node-content .file-node-icon,
