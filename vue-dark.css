@@ -36,6 +36,20 @@
   /* 代码块配色。 */
   --vc-code-bg: #242424;
   --vc-code-text: #e1e4e8;
+  /* One Dark 配色适配；注释、红色与紫色提亮以保证深底和选区的可读性。
+   * 参考：https://github.com/codemirror/theme-one-dark
+   * 按 Typora 的 CodeMirror token 映射，不假定定义标记一定是函数。 */
+  --vc-code-comment: #9da6b5;
+  --vc-code-keyword: #d19ae8;
+  --vc-code-operator: #56b6c2;
+  --vc-code-string: #98c379;
+  --vc-code-number: #d19a66;
+  --vc-code-definition: #61afef;
+  --vc-code-type: #e5c07b;
+  --vc-code-property: #e88c95;
+  --vc-code-punctuation: #abb2bf;
+  --vc-code-selection: #333b46;
+  --vc-code-gutter-border: #444d56;
 
   /* 阅读宽度与字体。 */
   --vc-content-width: 800px;
@@ -398,20 +412,20 @@ body {
 
 #write .md-fences .CodeMirror-gutters {
   background: transparent;
-  border-right: 1px solid #444d56;
+  border-right: 1px solid var(--vc-code-gutter-border);
 }
 
 #write .md-fences .CodeMirror-linenumber {
-  color: #959da5;
+  color: var(--vc-code-comment);
   padding-right: 12px;
 }
 
 #write .md-fences .CodeMirror-cursor {
-  border-left-color: #e1e4e8;
+  border-left-color: var(--vc-code-text);
 }
 
 #write .md-fences .CodeMirror-selected {
-  background: #414b57;
+  background: var(--vc-code-selection);
 }
 
 /* 编辑器内层背景透明，避免出现灰条；文字选区保留独立高亮。 */
@@ -430,54 +444,77 @@ body {
 
 #write .md-fences ::selection {
   color: #fff;
-  background: #414b57;
+  background: var(--vc-code-selection);
 }
 
-/* CodeMirror 语法高亮：保留当前配色。 */
+/* One Dark 风格的 CodeMirror 高亮；仅作用于围栏代码及图表源码。 */
 #write .md-fences .cm-comment {
-  color: #a0a9b4;
+  color: var(--vc-code-comment);
 }
 
-#write .md-fences .cm-keyword,
-#write .md-fences .cm-operator {
-  color: #f97583;
+#write .md-fences .cm-keyword {
+  color: var(--vc-code-keyword);
 }
 
-#write .md-fences .cm-string,
-#write .md-fences .cm-string-2 {
-  color: #9ecbff;
+#write .md-fences .cm-operator,
+#write .md-fences .cm-meta {
+  color: var(--vc-code-operator);
 }
 
+#write .md-fences .cm-string {
+  color: var(--vc-code-string);
+}
+
+#write .md-fences .cm-string-2,
 #write .md-fences .cm-number,
 #write .md-fences .cm-atom {
-  color: #79b8ff;
+  color: var(--vc-code-number);
 }
 
-#write .md-fences .cm-def,
-#write .md-fences .cm-variable-2 {
-  color: #b392f0;
+/* cm-def 也可能是变量定义；具体分类由各语言的解析器决定。 */
+#write .md-fences .cm-def {
+  color: var(--vc-code-definition);
 }
 
 #write .md-fences .cm-variable,
-#write .md-fences .cm-property {
-  color: #e1e4e8;
+#write .md-fences .cm-variable-2 {
+  color: var(--vc-code-text);
 }
 
-#write .md-fences .cm-tag {
-  color: #85e89d;
-}
-
-#write .md-fences .cm-attribute,
+#write .md-fences .cm-variable-3,
+#write .md-fences .cm-type,
 #write .md-fences .cm-builtin {
-  color: #ffab70;
+  color: var(--vc-code-type);
 }
 
-#write .md-fences .cm-meta {
-  color: #c8e1ff;
+#write .md-fences .cm-property,
+#write .md-fences .cm-tag,
+#write .md-fences .cm-qualifier {
+  color: var(--vc-code-property);
+}
+
+#write .md-fences .cm-attribute {
+  color: var(--vc-code-number);
+}
+
+#write .md-fences .cm-bracket,
+#write .md-fences .cm-punctuation {
+  color: var(--vc-code-punctuation);
+}
+
+#write .md-fences .cm-positive {
+  color: var(--vc-code-string);
+}
+
+#write .md-fences .cm-negative,
+#write .md-fences .cm-error {
+  color: var(--vc-code-property);
 }
 
 #write .md-fences .cm-error {
-  color: #fdaeb7;
+  background: transparent;
+  text-decoration: underline wavy;
+  text-underline-offset: 3px;
 }
 
 #write .md-fences .code-tooltip {
@@ -1183,6 +1220,8 @@ body {
     --vc-muted: #555;
     --vc-code-bg: #f6f6f7;
     --vc-code-text: #222;
+    --vc-code-comment: #555;
+    --vc-code-gutter-border: #ddd;
   }
 
   #write {
