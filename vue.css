@@ -2,6 +2,14 @@
  * Vue — Typora 浅色主题
  */
 
+@font-face {
+  font-family: "Noto Sans SC";
+  src: url("./fonts/NotoSansSC[wght].ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ==========================================================================
  * 01. 主题变量
  * ========================================================================== */
@@ -28,6 +36,7 @@
   /* 阅读宽度与字体。 */
   --vc-content-width: 800px;
   --vc-font:
+    "Noto Sans SC",
     -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", system-ui,
     "Microsoft YaHei", Arial, sans-serif;
   --monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
@@ -35,7 +44,7 @@
   /* Typora 控件与侧栏变量。 */
   --primary-color: var(--vc-green);
   --side-bar-bg-color: #ffffff;
-  --vc-sidebar-text: var(--text-color);
+  --vc-sidebar-text: var(--vc-muted);
   --vc-sidebar-active: transparent;
   --vc-sidebar-hover: var(--vc-soft);
   --control-text-color: var(--vc-muted);
@@ -73,6 +82,7 @@ body {
   color: var(--text-color);
   background: var(--bg-color);
   line-height: 1.8;
+  font-weight: 400;
 }
 
 ::selection {
