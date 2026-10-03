@@ -275,25 +275,26 @@ input:focus-visible {
 }
 
 /* 表格、图片、目录与脚注。 */
-#write table {
+/* md-reset 标记 Typora 内置控件，避免正文表格样式污染调整表格网格。 */
+#write table:not(.md-reset) {
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
   font-size: 0.9375rem;
 }
 
-#write th,
-#write td {
+#write th:not(.md-reset),
+#write td:not(.md-reset) {
   padding: 10px 16px;
   border: 1px solid var(--vc-divider);
 }
 
-#write th {
+#write th:not(.md-reset) {
   background: var(--vc-soft);
   font-weight: 600;
 }
 
-#write tr:nth-child(even) td {
+#write tr:not(.md-reset):nth-child(even) > td:not(.md-reset) {
   background: var(--vc-soft);
 }
 
@@ -1194,7 +1195,7 @@ input:focus-visible {
     widows: 3;
   }
 
-  #write table,
+  #write table:not(.md-reset),
   #write blockquote,
   #write img {
     break-inside: avoid;
