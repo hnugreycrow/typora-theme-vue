@@ -190,13 +190,6 @@ body {
   text-decoration: none;
 }
 
-a:focus-visible,
-button:focus-visible,
-input:focus-visible {
-  outline: 2px solid var(--vc-green);
-  outline-offset: 3px;
-}
-
 #write ul,
 #write ol {
   padding-left: 1.5em;
