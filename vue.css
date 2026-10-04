@@ -1074,7 +1074,7 @@ body {
 
 #typora-quick-open .typora-quick-open-item.active {
   background: var(--vc-green-soft);
-  color: var(--vc-green);
+  color: var(--text-color);
 }
 
 .dropdown-menu,
@@ -1086,8 +1086,8 @@ body {
 }
 
 .dropdown-menu > li > a:hover {
-  background: var(--vc-green-soft);
-  color: var(--vc-green);
+  background: var(--vc-soft);
+  color: var(--text-color);
 }
 
 /* ==========================================================================
