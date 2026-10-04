@@ -7,6 +7,9 @@
  * ========================================================================== */
 
 :root {
+  /* Mermaid 图表随 Typora 主题切换配色。 */
+  --mermaid-theme: dark;
+
   /* 页面与正文配色。 */
   --bg-color: #1a1a1a;
   --text-color: #ffffffde;
@@ -533,7 +536,7 @@ body {
 
 /*
  * Typora 的高级围栏承载 Mermaid、时序图和流程图。
- * 图表预览保留独立浅色画布，兼容默认 SVG 深色文字与连线；源码编辑区使用深底。
+ * 普通时序图和流程图保留浅色画布；Mermaid 使用下方的深色画布；源码编辑区使用深底。
  */
 #write .md-fences.md-fences-advanced {
   margin: 22px 0;
@@ -552,6 +555,15 @@ body {
 #write .md-fences-advanced .md-diagram-panel-preview {
   background: #ffffff;
   color: #213547;
+}
+
+/* Mermaid 自带深色文字与连线配色，画布同步使用页面背景。 */
+#write .md-fences.md-fences-advanced[lang="mermaid"],
+#write .md-fences-advanced[lang="mermaid"] .md-fences-adv-panel,
+#write .md-fences-advanced[lang="mermaid"] .md-diagram-panel,
+#write .md-fences-advanced[lang="mermaid"] .md-diagram-panel-preview {
+  background: var(--bg-color);
+  color: var(--text-color);
 }
 
 #write .md-fences.md-fences-advanced .CodeMirror {
