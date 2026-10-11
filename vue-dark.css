@@ -285,6 +285,7 @@ body {
 /* md-reset 标记 Typora 内置控件，避免正文表格样式污染调整表格网格。 */
 #write table:not(.md-reset) {
   width: 100%;
+  table-layout: auto;
   border-collapse: collapse;
   border-spacing: 0;
   font-size: 0.9375rem;
@@ -292,17 +293,74 @@ body {
 
 #write th:not(.md-reset),
 #write td:not(.md-reset) {
-  padding: 10px 16px;
+  min-width: 2.5em;
+  padding: 8px 10px;
   border: 1px solid var(--vc-divider);
+  vertical-align: top;
+  line-height: 1.55;
+  word-break: normal;
+  overflow-wrap: anywhere;
 }
 
 #write th:not(.md-reset) {
+  white-space: nowrap;
   background: var(--vc-soft);
   font-weight: 600;
 }
 
 #write tr:not(.md-reset):nth-child(even) > td:not(.md-reset) {
   background: var(--vc-soft);
+}
+
+/* 单元格内段落沿用紧凑行距，保留多段内容的间隔。 */
+#write th:not(.md-reset) p,
+#write td:not(.md-reset) p {
+  margin: 0;
+  line-height: inherit;
+}
+
+#write th:not(.md-reset) p + p,
+#write td:not(.md-reset) p + p {
+  margin-top: 0.5em;
+}
+
+/* 利用正文两侧的内边距，不依据视口宽度扩展，避免侵入侧栏。
+ * 只扩大顶层表格；引用和列表中的表格保持原宽度。
+ * 滚动放在 Typora 的表格容器上，保留原生表格布局。 */
+@media screen {
+  #write .md-table-fig {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  #write > .md-table-fig {
+    width: calc(100% + 32px);
+    max-width: none;
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+}
+
+
+/* 六列以上的顶层表格按实际编辑区域扩展，每侧最多借用 64px。
+ * 命名容器限定在 Typora 内，避免导出页面将 cqw 回退为视口宽度。
+ * 不支持容器查询的版本继续使用上面的 16px 扩展。 */
+@supports (container-type: inline-size) {
+  @media screen {
+    content {
+      container-type: inline-size;
+      container-name: vc-editor;
+    }
+
+    @container vc-editor (min-width: 0px) {
+      #write > .md-table-fig:has(> table:not(.md-reset) > thead > tr > :nth-child(6)) {
+        --vc-table-outset: clamp(16px, calc((100cqw - 100%) / 2 - 24px), 64px);
+        width: calc(100% + var(--vc-table-outset) * 2);
+        margin-left: calc(-1 * var(--vc-table-outset));
+        margin-right: calc(-1 * var(--vc-table-outset));
+      }
+    }
+  }
 }
 
 #write .md-table-resize-popover {
@@ -1257,7 +1315,22 @@ body {
     widows: 3;
   }
 
-  #write table:not(.md-reset),
+  /* 长表可跨页；打印时解除短表头的单行限制。 */
+  #write table:not(.md-reset) {
+    break-inside: auto;
+  }
+
+  #write th:not(.md-reset),
+  #write td:not(.md-reset) {
+    min-width: 0;
+    white-space: normal;
+  }
+
+  #write .md-table-fig {
+    break-inside: auto;
+    overflow: visible;
+  }
+
   #write blockquote,
   #write img {
     break-inside: avoid;
