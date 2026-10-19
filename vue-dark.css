@@ -976,6 +976,28 @@ body {
   content: "\f115";
 }
 
+/* 子项作为整体同步淡入，不逐项延迟，也不影响展开后的点击。 */
+#file-library-tree .file-node-expanded > .file-node-children {
+  animation: vue-directory-expand 180ms ease-out;
+}
+
+@keyframes vue-directory-expand {
+  from {
+    opacity: 0.65;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #file-library-tree .file-node-expanded > .file-node-children {
+    animation: none;
+  }
+}
+
 .file-node-open-state {
   padding: 2px;
   margin-right: 8px;
