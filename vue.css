@@ -421,7 +421,7 @@ body {
   ) {
   box-sizing: border-box;
   margin: 22px 0;
-  padding: 14px 24px;
+  padding: 28px 24px 20px;
   background: var(--vc-code-bg);
   color: var(--vc-code-text);
   border: 1px solid var(--vc-code-bg);
@@ -576,16 +576,47 @@ body {
   background: transparent;
 }
 
+/* 右上角显示语言。
+ * 顶部预留固定空间，避免标签遮挡代码。 */
+#write .md-fences:not(.md-fences-advanced) {
+  position: relative;
+}
+
+#write .md-fences:not(.md-fences-advanced)[lang]::before {
+  content: attr(lang);
+  position: absolute;
+  top: 2px;
+  right: 12px;
+  max-width: calc(100% - 24px);
+  overflow: hidden;
+  color: var(--vc-code-comment);
+  font: 600 12px/22px var(--vc-font);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+
+@media screen {
+  #write .md-fences:not(.md-fences-advanced) .code-tooltip {
+    padding: 0 6px;
+    max-width: calc(100% - 20px);
+  }
+
+  #write .md-fences:not(.md-fences-advanced).md-focus .code-tooltip,
+  #write .md-fences:not(.md-fences-advanced):focus-within .code-tooltip {
+    display: block !important;
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
 #write .md-fences .code-tooltip {
-  color: var(--vc-muted);
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 12px;
   background: #fff;
   border: 1px solid var(--vc-border);
   border-radius: 5px;
-}
-
-#write .md-fences .code-tooltip input {
-  color: var(--text-color);
-  background: #fff;
 }
 
 /*
@@ -1250,6 +1281,10 @@ body {
     ) {
     padding: 16px;
   }
+
+  #write .md-fences:not(.md-fences-advanced) {
+    padding-top: 38px;
+  }
 }
 
 /* ==========================================================================
@@ -1325,5 +1360,11 @@ body {
 
   #write a {
     color: #236a4c;
+  }
+}
+
+@media print {
+  #write .md-fences:not(.md-fences-advanced) .code-tooltip {
+    display: none !important;
   }
 }
