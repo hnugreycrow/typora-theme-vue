@@ -955,7 +955,7 @@ body {
 }
 
 /* 展开的目录使用打开的文件夹图标。 */
-.file-node-expanded > .file-node-content .fa-folder:before {
+#file-library-tree .file-node-expanded > .file-node-content .fa-folder:before {
   content: "\f115";
 }
 
