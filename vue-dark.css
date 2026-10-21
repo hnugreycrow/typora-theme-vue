@@ -66,8 +66,8 @@
   --active-file-border-color: transparent;
   --item-hover-bg-color: var(--vc-soft);
   --item-hover-text-color: var(--text-color);
-  --select-text-bg-color: rgba(66, 184, 131, 0.2);
-  --select-text-font-color: var(--text-color);
+  --select-text-bg-color: #334a63;
+  --select-text-font-color: #e1e4e8;
   --window-border: 1px solid var(--vc-border);
   --rawblock-edit-panel-bd: var(--vc-soft);
   --search-select-bg-color: #fff0b3;
