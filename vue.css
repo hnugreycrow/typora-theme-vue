@@ -57,8 +57,6 @@
   --vc-sidebar-hover: var(--vc-soft);
   --control-text-color: var(--vc-muted);
   --control-text-hover-color: var(--text-color);
-  --active-file-bg-color: var(--vc-sidebar-active);
-  --active-file-text-color: var(--vc-green);
   --active-file-border-color: transparent;
   --item-hover-bg-color: var(--vc-soft);
   --item-hover-text-color: var(--text-color);
@@ -337,7 +335,6 @@ body {
   }
 }
 
-
 /* 六列以上的顶层表格按实际编辑区域扩展，每侧最多借用 64px。
  * 命名容器限定在 Typora 内，避免导出页面将 cqw 回退为视口宽度。
  * 不支持容器查询的版本继续使用上面的 16px 扩展。 */
@@ -349,7 +346,10 @@ body {
     }
 
     @container vc-editor (min-width: 0px) {
-      #write > .md-table-fig:has(> table:not(.md-reset) > thead > tr > :nth-child(6)) {
+      #write
+        > .md-table-fig:has(
+          > table:not(.md-reset) > thead > tr > :nth-child(6)
+        ) {
         --vc-table-outset: clamp(16px, calc((100cqw - 100%) / 2 - 24px), 64px);
         width: calc(100% + var(--vc-table-outset) * 2);
         margin-left: calc(-1 * var(--vc-table-outset));
