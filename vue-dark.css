@@ -512,72 +512,128 @@ body {
   background: var(--vc-code-selection);
 }
 
-/* One Dark 风格的 CodeMirror 高亮；仅作用于围栏代码及图表源码。 */
-#write .md-fences .cm-comment {
+/* One Dark 风格的 CodeMirror 高亮：围栏代码、图表源码与源代码模式共用。 */
+#write .md-fences .cm-comment,
+#typora-source .CodeMirror .cm-comment {
   color: var(--vc-code-comment);
 }
 
-#write .md-fences .cm-keyword {
+#write .md-fences .cm-keyword,
+#typora-source .CodeMirror .cm-keyword {
   color: var(--vc-code-keyword);
 }
 
 #write .md-fences .cm-operator,
-#write .md-fences .cm-meta {
+#typora-source .CodeMirror .cm-operator,
+#write .md-fences .cm-meta,
+#typora-source .CodeMirror .cm-meta {
   color: var(--vc-code-operator);
 }
 
-#write .md-fences .cm-string {
+#write .md-fences .cm-string,
+#typora-source .CodeMirror .cm-string {
   color: var(--vc-code-string);
 }
 
 #write .md-fences .cm-string-2,
+#typora-source .CodeMirror .cm-string-2,
 #write .md-fences .cm-number,
-#write .md-fences .cm-atom {
+#typora-source .CodeMirror .cm-number,
+#write .md-fences .cm-atom,
+#typora-source .CodeMirror .cm-atom {
   color: var(--vc-code-number);
 }
 
 /* cm-def 也可能是变量定义；具体分类由各语言的解析器决定。 */
-#write .md-fences .cm-def {
+#write .md-fences .cm-def,
+#typora-source .CodeMirror .cm-def {
   color: var(--vc-code-definition);
 }
 
 #write .md-fences .cm-variable,
-#write .md-fences .cm-variable-2 {
+#typora-source .CodeMirror .cm-variable,
+#write .md-fences .cm-variable-2,
+#typora-source .CodeMirror .cm-variable-2 {
   color: var(--vc-code-text);
 }
 
 #write .md-fences .cm-variable-3,
+#typora-source .CodeMirror .cm-variable-3,
 #write .md-fences .cm-type,
-#write .md-fences .cm-builtin {
+#typora-source .CodeMirror .cm-type,
+#write .md-fences .cm-builtin,
+#typora-source .CodeMirror .cm-builtin {
   color: var(--vc-code-type);
 }
 
 #write .md-fences .cm-property,
+#typora-source .CodeMirror .cm-property,
 #write .md-fences .cm-tag,
-#write .md-fences .cm-qualifier {
+#typora-source .CodeMirror .cm-tag,
+#write .md-fences .cm-qualifier,
+#typora-source .CodeMirror .cm-qualifier {
   color: var(--vc-code-property);
 }
 
-#write .md-fences .cm-attribute {
+#write .md-fences .cm-attribute,
+#typora-source .CodeMirror .cm-attribute {
   color: var(--vc-code-number);
 }
 
 #write .md-fences .cm-bracket,
-#write .md-fences .cm-punctuation {
+#typora-source .CodeMirror .cm-bracket,
+#write .md-fences .cm-punctuation,
+#typora-source .CodeMirror .cm-punctuation {
   color: var(--vc-code-punctuation);
 }
 
-#write .md-fences .cm-positive {
+#write .md-fences .cm-positive,
+#typora-source .CodeMirror .cm-positive {
   color: var(--vc-code-string);
 }
 
 #write .md-fences .cm-negative,
-#write .md-fences .cm-error {
+#typora-source .CodeMirror .cm-negative,
+#write .md-fences .cm-error,
+#typora-source .CodeMirror .cm-error {
   color: var(--vc-code-property);
 }
 
-#write .md-fences .cm-error {
+#write .md-fences .cm-error,
+#typora-source .CodeMirror .cm-error {
   background: transparent;
+}
+
+/* 源代码模式位于 #typora-source，不在 #write 内；独立设置编辑器底色和默认文字。 */
+#typora-source {
+  --select-text-bg-color: var(--vc-code-selection);
+  --select-text-font-color: var(--vc-code-text);
+  color: var(--vc-code-text);
+  background: var(--bg-color);
+}
+
+#typora-source .CodeMirror {
+  color: var(--vc-code-text);
+  background: var(--bg-color);
+}
+
+#typora-source .CodeMirror-linenumber {
+  color: var(--vc-code-comment);
+}
+
+#typora-source .CodeMirror-cursor {
+  border-left-color: var(--vc-code-text);
+}
+
+/* Markdown 标记使用主题绿与柔和蓝灰，保留宿主的粗体、斜体和字号。 */
+#typora-source .CodeMirror .cm-header,
+#typora-source .CodeMirror .cm-link {
+  color: var(--vc-green);
+}
+
+#typora-source .CodeMirror .cm-quote,
+#typora-source .CodeMirror .cm-hr {
+  color: var(--vc-code-comment);
 }
 
 /* 右上角显示语言。
