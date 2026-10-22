@@ -212,7 +212,7 @@ body {
 }
 
 #write li::marker {
-  color: var(--text-color);
+  color: var(--vc-muted);
 }
 
 #write .md-task-list-item > input {
