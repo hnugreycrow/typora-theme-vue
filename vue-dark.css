@@ -272,6 +272,19 @@ body {
   margin: 12px 0;
 }
 
+/* 深色下引用与代码块同为 #242424；屏幕内把引用里的代码块压暗一档，
+ * 并补一条细边，否则代码块的底色、边框和留白会和引用融在一起。
+ * 打印仍走 09 节的浅色代码底色。 */
+@media screen {
+  #write blockquote {
+    --vc-code-bg: #1e1e1e;
+  }
+
+  #write blockquote .md-fences:not(.md-fences-advanced) {
+    border-color: var(--vc-border);
+  }
+}
+
 /* 与 h2 的上边框区分：h2 用整行细线标章节，hr 用居中短线标内容断点。 */
 #write hr {
   width: 96px;
