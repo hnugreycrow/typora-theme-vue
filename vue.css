@@ -107,6 +107,8 @@ body {
   color: var(--text-color);
   background: var(--bg-color);
   line-height: var(--vc-leading);
+  /* 与官网 base.css 一致：中文在 16px 下需要一点字距，整页密度会松一些。 */
+  letter-spacing: 0.2px;
   font-weight: 400;
 }
 
@@ -422,6 +424,15 @@ body {
 /* ==========================================================================
  * 04. 代码与图表
  * ========================================================================== */
+
+/* 等宽区域不跟随正文的字距。 */
+#write code,
+#write tt,
+#write pre,
+#write .CodeMirror,
+#typora-source .CodeMirror {
+  letter-spacing: 0;
+}
 
 /* 行内代码使用浅底；普通代码块使用深底，并排除图表与编辑器内部 pre。 */
 #write code,

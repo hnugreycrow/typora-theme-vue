@@ -34,7 +34,8 @@
 
   /* 代码块配色。 */
   --vc-code-bg: #242424;
-  --vc-code-text: #e1e4e8;
+  /* 深色底上大面积亮字更刺眼，比浅色主题压暗一档。 */
+  --vc-code-text: #d5d8dd;
   /* One Dark 配色适配；注释、红色与紫色提亮以保证深底和选区的可读性。
    * 参考：https://github.com/codemirror/theme-one-dark
    * 按 Typora 的 CodeMirror token 映射，不假定定义标记一定是函数。 */
@@ -105,6 +106,8 @@ body {
   color: var(--text-color);
   background: var(--bg-color);
   line-height: var(--vc-leading);
+  /* 与官网 base.css 一致：中文在 16px 下需要一点字距，整页密度会松一些。 */
+  letter-spacing: 0.2px;
   font-weight: 400;
 }
 
@@ -420,6 +423,15 @@ body {
 /* ==========================================================================
  * 04. 代码与图表
  * ========================================================================== */
+
+/* 等宽区域不跟随正文的字距。 */
+#write code,
+#write tt,
+#write pre,
+#write .CodeMirror,
+#typora-source .CodeMirror {
+  letter-spacing: 0;
+}
 
 /* 行内代码使用深灰底色；普通代码块使用次级深色背景，并排除图表与编辑器内部 pre。 */
 #write code,
