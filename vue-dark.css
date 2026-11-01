@@ -15,11 +15,12 @@
   --text-color: #ffffffde;
   --font-color: #ffffffde;
   --vc-muted: #ebebeb99;
-  --vc-faint: #ebebeb61;
   --vc-divider: #545454a6;
   --vc-border: #5454547a;
   --vc-soft: #242424;
   --vc-mute: #2f2f2f;
+  /* 浮层底色与浅色主题同名，取值沿用原来的 --vc-soft。 */
+  --vc-surface: #242424;
   --vc-inline-code: #aac8e4;
   --vc-mark-bg: #594600;
   --vc-mark-text: #ffe417;
@@ -163,11 +164,11 @@ body {
 }
 
 #write h5 {
-  font-size: 1rem;
+  font-size: 0.9375rem;
 }
 
 #write h6 {
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   color: var(--vc-muted);
 }
 
@@ -370,7 +371,7 @@ body {
 }
 
 #write .md-table-resize-popover {
-  background: var(--vc-soft);
+  background: var(--vc-surface);
 }
 
 #write img {
@@ -680,7 +681,7 @@ body {
   color: var(--text-color);
   font-weight: 500;
   font-size: 12px;
-  background: var(--vc-soft);
+  background: var(--vc-surface);
   border: 1px solid var(--vc-border);
   border-radius: 5px;
 }
@@ -1133,12 +1134,11 @@ body {
   display: none !important;
 }
 
-/* 没有可显示子项的目录使用变淡的空心文件夹图标和文字。 */
+/* 没有可显示子项的目录使用变淡的图标和文字。 */
 .file-library-node:not(
     .file-node-root
   )[data-is-directory="true"][data-has-sub="false"]
   > .file-node-content {
-  content: "\f114";
   opacity: 0.5;
 }
 
@@ -1256,7 +1256,7 @@ body {
  * ========================================================================== */
 
 #typora-quick-open {
-  background: var(--vc-soft);
+  background: var(--vc-surface);
   color: var(--text-color);
   border: 1px solid var(--vc-border);
   border-radius: 8px;
@@ -1269,7 +1269,7 @@ body {
 
 .dropdown-menu,
 .context-menu {
-  background: var(--vc-soft);
+  background: var(--vc-surface);
   color: var(--text-color);
   border: 1px solid var(--vc-border);
   border-radius: 6px;
@@ -1403,7 +1403,6 @@ body {
     --vc-mark-text: #574710;
     --vc-divider: #3c3c3c4a;
     --vc-border: #3c3c3c1f;
-    --vc-faint: #3c3c3c54;
     --text-color: #222;
     --vc-muted: #555;
     --vc-code-bg: #f6f6f7;

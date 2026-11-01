@@ -15,10 +15,17 @@
   --text-color: #213547;
   --font-color: #213547;
   --vc-muted: #3c3c3cb3;
-  --vc-faint: #3c3c3c54;
   --vc-divider: #3c3c3c4a;
   --vc-border: #3c3c3c1f;
   --vc-soft: #f9f9f9;
+  /* 次级底色：行内代码与嵌套引用共用。 */
+  --vc-mute: #f1f1f1;
+  /* 浮层底色：下拉菜单、快捷打开、表格调整气泡等浮起表面。 */
+  --vc-surface: #ffffff;
+  /* 行内代码与高亮配色，取自官网对应色值。 */
+  --vc-inline-code: #476582;
+  --vc-mark-bg: #fff1b8;
+  --vc-mark-text: #574710;
   --vc-green: #42b883;
   --vc-green-hover: #33a06f;
   /* 正文链接色。官网原样是 #42b883（白底对比度 2.5:1）；
@@ -55,7 +62,7 @@
 
   /* Typora 控件与侧栏变量。 */
   --primary-color: var(--vc-green);
-  --side-bar-bg-color: #ffffff;
+  --side-bar-bg-color: var(--bg-color);
   --vc-sidebar-text: var(--vc-muted);
   --vc-sidebar-active: transparent;
   --vc-sidebar-hover: var(--vc-soft);
@@ -159,11 +166,11 @@ body {
 }
 
 #write h5 {
-  font-size: 1rem;
+  font-size: 0.9375rem;
 }
 
 #write h6 {
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   color: var(--vc-muted);
 }
 
@@ -251,7 +258,7 @@ body {
 }
 
 #write blockquote blockquote {
-  background: #f1f1f1;
+  background: var(--vc-mute);
   margin: 12px 0;
 }
 
@@ -262,8 +269,8 @@ body {
 }
 
 #write mark {
-  color: #574710;
-  background: #fff1b8;
+  color: var(--vc-mark-text);
+  background: var(--vc-mark-bg);
   padding: 1px 3px;
   border-radius: 3px;
 }
@@ -366,7 +373,7 @@ body {
 }
 
 #write .md-table-resize-popover {
-  background: #fff;
+  background: var(--vc-surface);
 }
 
 #write img {
@@ -410,8 +417,8 @@ body {
 #write tt {
   font-family: var(--monospace);
   font-size: 0.875em;
-  color: #476582;
-  background: #f1f1f1;
+  color: var(--vc-inline-code);
+  background: var(--vc-mute);
   padding: 3px 6px;
   border-radius: 4px;
 }
@@ -620,7 +627,7 @@ body {
   color: var(--text-color);
   font-weight: 500;
   font-size: 12px;
-  background: #fff;
+  background: var(--vc-surface);
   border: 1px solid var(--vc-border);
   border-radius: 5px;
 }
@@ -1060,12 +1067,11 @@ body {
   display: none !important;
 }
 
-/* 没有可显示子项的目录使用变淡的空心文件夹图标和文字。 */
+/* 没有可显示子项的目录使用变淡的图标和文字。 */
 .file-library-node:not(
     .file-node-root
   )[data-is-directory="true"][data-has-sub="false"]
   > .file-node-content {
-  content: "\f114";
   opacity: 0.5;
 }
 
@@ -1183,7 +1189,7 @@ body {
  * ========================================================================== */
 
 #typora-quick-open {
-  background: #fff;
+  background: var(--vc-surface);
   color: var(--text-color);
   border: 1px solid var(--vc-border);
   border-radius: 8px;
@@ -1196,7 +1202,7 @@ body {
 
 .dropdown-menu,
 .context-menu {
-  background: #fff;
+  background: var(--vc-surface);
   color: var(--text-color);
   border: 1px solid var(--vc-border);
   border-radius: 6px;
