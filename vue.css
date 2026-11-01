@@ -21,6 +21,10 @@
   --vc-soft: #f9f9f9;
   --vc-green: #42b883;
   --vc-green-hover: #33a06f;
+  /* 正文链接色。官网原样是 #42b883（白底对比度 2.5:1）；
+   * 更看重正文可读性时可改为 #22795a（约 5.3:1），装饰性绿色仍用 --vc-green。 */
+  --vc-link: var(--vc-green);
+  --vc-link-hover: var(--vc-green-hover);
   /* 弹出控件的选中底色：由品牌绿派生，并非原站变量。 */
   --vc-green-soft: rgba(66, 184, 131, 0.1);
 
@@ -133,7 +137,9 @@ body {
 #write h1 {
   font-size: 2.125rem;
   line-height: 1.35;
-  margin: 0 0 28px;
+  /* 保留上边距：正文中重复出现的 h1 需要与上文拉开距离；
+   * 文档首个 h1 由下方的 :first-child 规则归零。 */
+  margin: 48px 0 28px;
   letter-spacing: -0.025em;
 }
 
@@ -161,6 +167,7 @@ body {
   color: var(--vc-muted);
 }
 
+/* 首个块级元素贴住顶部：文档标题（h1）不再额外留白。 */
 #write > :first-child {
   margin-top: 0;
 }
@@ -182,14 +189,13 @@ body {
 }
 
 #write a {
-  color: var(--vc-green);
+  color: var(--vc-link);
   font-weight: 500;
   text-decoration: none;
 }
 
 #write a:hover {
-  color: var(--vc-green-hover);
-  text-decoration: none;
+  color: var(--vc-link-hover);
 }
 
 #write ul,
