@@ -52,6 +52,14 @@
 
   /* 阅读宽度与字体。 */
   --vc-content-width: 800px;
+
+  /* 排版节奏：在官网 .vt-doc 的比例上略收紧。官网的 h2 是 4rem + 1.8rem，
+   * 在连续滚动的编辑器里会显得空。想整体放松或收紧时只改这几个值。 */
+  --vc-leading: 1.7;
+  --vc-paragraph-gap: 18px;
+  --vc-h2-gap: 3.5rem;
+  --vc-h2-pad: 1.5rem;
+  --vc-h3-gap: 2.5rem;
   --vc-font:
     "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
@@ -96,7 +104,7 @@ body {
   font-family: var(--vc-font);
   color: var(--text-color);
   background: var(--bg-color);
-  line-height: 1.8;
+  line-height: var(--vc-leading);
   font-weight: 400;
 }
 
@@ -121,8 +129,8 @@ body {
 }
 
 #write p {
-  margin: 18px 0;
-  line-height: 1.8;
+  margin: var(--vc-paragraph-gap) 0;
+  line-height: var(--vc-leading);
 }
 
 #write h1,
@@ -151,12 +159,13 @@ body {
 #write h2 {
   font-size: 1.5rem;
   border-top: 1px solid var(--vc-border);
-  margin-top: 48px;
-  padding-top: 24px;
+  margin: var(--vc-h2-gap) 0 var(--vc-h2-pad);
+  padding-top: var(--vc-h2-pad);
 }
 
 #write h3 {
   font-size: 1.25rem;
+  margin: var(--vc-h3-gap) 0 1rem;
 }
 
 #write h4 {
@@ -206,7 +215,7 @@ body {
 #write ul,
 #write ol {
   padding-left: 1.5em;
-  margin: 16px 0;
+  margin: var(--vc-paragraph-gap) 0;
 }
 
 #write li {
@@ -260,10 +269,12 @@ body {
   margin: 12px 0;
 }
 
+/* 与 h2 的上边框区分：h2 用整行细线标章节，hr 用居中短线标内容断点。 */
 #write hr {
+  width: 96px;
+  margin: 2.5rem auto;
   border: 0;
-  border-top: 1px solid var(--vc-border);
-  margin: 36px 0;
+  border-top: 1px solid var(--vc-divider);
 }
 
 #write mark {
@@ -431,7 +442,7 @@ body {
     .md-fences-advanced pre
   ) {
   box-sizing: border-box;
-  margin: 22px 0;
+  margin: 28px 0;
   padding: 28px 24px 20px;
   background: var(--vc-code-bg);
   color: var(--vc-code-text);
@@ -691,7 +702,7 @@ body {
  * 普通时序图和流程图保留浅色画布；Mermaid 使用下方的深色画布；源码编辑区使用深底。
  */
 #write .md-fences.md-fences-advanced {
-  margin: 22px 0;
+  margin: 28px 0;
   padding: 0;
   border: 0;
   border-radius: 0;
@@ -1371,8 +1382,8 @@ body {
   }
 
   #write h2 {
-    margin-top: 36px;
-    padding-top: 20px;
+    margin-top: 48px;
+    padding-top: 24px;
   }
 
   #write .md-fences:not(.md-fences-advanced),
