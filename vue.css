@@ -612,6 +612,33 @@ body {
   background: transparent;
 }
 
+/* Markdown 语法：围栏内标题紫、链接蓝、引用与分隔线注释灰。 */
+#write .cm-s-inner .cm-header, .cm-s-inner.cm-header {
+  color: var(--vc-code-keyword);
+}
+
+#write .CodeMirror .cm-link {
+  color: var(--vc-code-definition);
+}
+
+#write .cm-s-inner .cm-quote,
+#write .cm-s-inner .cm-hr {
+  color: var(--vc-code-comment);
+}
+
+#typora-source .cm-s-inner .cm-header, .cm-s-inner.cm-header {
+  color: #8e44ad;
+}
+
+#typora-source .CodeMirror .cm-link {
+  color: #2b6cb0;
+}
+
+#typora-source .CodeMirror .cm-quote,
+#typora-source .CodeMirror .cm-hr {
+  color: #6b7280;
+}
+
 /* 右上角显示语言。
  * 顶部预留固定空间，避免标签遮挡代码。 */
 #write .md-fences:not(.md-fences-advanced) {

@@ -1,7 +1,7 @@
 # Markdown 语法演示
 
 > 主题回归检查用。修改 `vue.css` / `vue-dark.css` 后，用 Typora 打开本文档，浅色与深色各看一遍。
-> 重点核对：标题间距、两种分隔线、代码块横向滚动、六列表格、引用块内部排版。
+> 重点核对：标题间距、两种分隔线、代码块横向滚动、六列表格、引用块内部排版、markdown 围栏取色。
 
 ## 1. 标题层级
 
@@ -87,6 +87,23 @@ createApp({
 npm create vue@latest
 npm install
 npm run dev
+```
+
+```markdown
+# Markdown 语法演示
+
+这是一份演示 Markdown 常用语法的文档。
+
+## 二级标题
+
+### 三级标题
+
+- **粗体**、*斜体*、~~删除线~~、`行内代码`
+- [Vue 快速上手](https://cn.vuejs.org/guide/quick-start.html)
+
+> 引用与分隔线一并检查取色。
+
+---
 ```
 
 ## 6. 表格

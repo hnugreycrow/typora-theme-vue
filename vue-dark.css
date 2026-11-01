@@ -649,6 +649,34 @@ body {
   background: transparent;
 }
 
+/* Markdown 语法：围栏与源代码模式统一取 One Dark 色板，
+ * 标题紫、链接蓝、引用与分隔线注释灰。 */
+#write .cm-s-inner .cm-header, .cm-s-inner.cm-header {
+  color: var(--vc-code-keyword);
+}
+
+#write .CodeMirror .cm-link {
+  color: var(--vc-code-definition);
+}
+
+#write .cm-s-inner .cm-quote,
+#write .cm-s-inner .cm-hr {
+  color: var(--vc-code-comment);
+}
+
+#typora-source .cm-s-inner .cm-header, .cm-s-inner.cm-header {
+  color: var(--vc-code-keyword);
+}
+
+#typora-source .CodeMirror .cm-link {
+  color: var(--vc-code-definition);
+}
+
+#typora-source .CodeMirror .cm-quote,
+#typora-source .CodeMirror .cm-hr {
+  color: var(--vc-code-comment);
+}
+
 /* 源代码模式位于 #typora-source，不在 #write 内；独立设置编辑器底色和默认文字。 */
 #typora-source {
   --select-text-bg-color: var(--vc-code-selection);
@@ -668,17 +696,6 @@ body {
 
 #typora-source .CodeMirror-cursor {
   border-left-color: var(--vc-code-text);
-}
-
-/* Markdown 标记使用主题绿与柔和蓝灰，保留宿主的粗体、斜体和字号。 */
-#typora-source .CodeMirror .cm-header,
-#typora-source .CodeMirror .cm-link {
-  color: var(--vc-green);
-}
-
-#typora-source .CodeMirror .cm-quote,
-#typora-source .CodeMirror .cm-hr {
-  color: var(--vc-code-comment);
 }
 
 /* 右上角显示语言。
