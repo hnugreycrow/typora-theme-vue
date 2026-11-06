@@ -64,8 +64,8 @@
   /* 排版节奏：在官网 .vt-doc 的比例上略收紧。官网的 h2 是 4rem + 1.8rem，
    * 在连续滚动的编辑器里会显得空。想整体放松或收紧时只改这几个值。 */
   --vc-leading: 1.7;
-  --vc-paragraph-gap: 18px;
-  --vc-h2-gap: 3.5rem;
+  --vc-paragraph-gap: 16px;
+  --vc-h2-gap: 3rem;
   --vc-h2-pad: 1.5rem;
   --vc-h3-gap: 2.5rem;
   --vc-font:
