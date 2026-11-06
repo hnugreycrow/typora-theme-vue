@@ -416,6 +416,14 @@ body {
   border-top: none;
   font-size: 0.875rem;
   color: var(--vc-muted);
+  /* 宿主默认再叠一层 0.8 透明度，会把 muted 又冲淡一档。 */
+  opacity: 1;
+}
+
+/* 正文链接色会盖掉宿主的继承色，让编号跟随角标而不是变成链接绿。 */
+#write sup.md-footnote a,
+#write sup.md-footnote a:hover {
+  color: inherit;
 }
 
 #write .md-def-name {

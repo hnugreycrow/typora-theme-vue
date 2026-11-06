@@ -51,6 +51,13 @@
   --vc-code-selection: #333b46;
   --vc-code-gutter-border: #444d56;
 
+  /* GitHub 风格 alert 的强调色：沿用代码块色板，深色底上标签仍可读。 */
+  --vc-alert-note: var(--vc-code-definition);
+  --vc-alert-tip: var(--vc-green);
+  --vc-alert-important: var(--vc-code-keyword);
+  --vc-alert-warning: var(--vc-code-type);
+  --vc-alert-caution: var(--vc-code-property);
+
   /* 阅读宽度与字体。 */
   --vc-content-width: 800px;
 
@@ -429,10 +436,66 @@ body {
   border-top: none;
   font-size: 0.875rem;
   color: var(--vc-muted);
+  /* 宿主默认再叠一层 0.8 透明度，会把 muted 又冲淡一档。 */
+  opacity: 1;
+}
+
+/* 宿主给脚注角标固定了浅灰底与 #555 字，深色下会跳成亮色 chip。 */
+#write sup.md-footnote {
+  color: var(--vc-muted);
+  background: var(--vc-mute);
+}
+
+/* 正文链接色会盖掉宿主的继承色，让编号跟随角标而不是变成链接绿。 */
+#write sup.md-footnote a,
+#write sup.md-footnote a:hover {
+  color: inherit;
 }
 
 #write .md-def-name {
   color: var(--vc-green);
+}
+
+/* GitHub 风格 alert（> [!NOTE] 等）。宿主的标签与左侧竖线按浅色底
+ * 取色，深色下统一换成代码块的强调色。 */
+#write .md-alert.md-alert-note {
+  border-left-color: var(--vc-alert-note);
+}
+
+#write .md-alert.md-alert-tip {
+  border-left-color: var(--vc-alert-tip);
+}
+
+#write .md-alert.md-alert-important {
+  border-left-color: var(--vc-alert-important);
+}
+
+#write .md-alert.md-alert-warning {
+  border-left-color: var(--vc-alert-warning);
+}
+
+#write .md-alert.md-alert-caution {
+  border-left-color: var(--vc-alert-caution);
+}
+
+#write .md-alert-text-note {
+  color: var(--vc-alert-note);
+}
+
+#write .md-alert-text-tip {
+  color: var(--vc-alert-tip);
+}
+
+#write .md-alert-text-important {
+  color: var(--vc-alert-important);
+}
+
+#write .md-alert-text-warning {
+  color: var(--vc-alert-warning);
+}
+
+#write .md-alert-text-caution {
+  color: var(--vc-alert-caution);
 }
 
 /* ==========================================================================
@@ -1464,6 +1527,12 @@ body {
     --vc-code-text: #222;
     --vc-code-comment: #555;
     --vc-code-gutter-border: #ddd;
+    /* 打印回退到宿主的浅色 alert 配色。 */
+    --vc-alert-note: #0969da;
+    --vc-alert-tip: #1f883d;
+    --vc-alert-important: #8250df;
+    --vc-alert-warning: #9a6700;
+    --vc-alert-caution: #cf222e;
   }
 
   #write {
