@@ -300,6 +300,20 @@ body {
   border-top: 1px solid var(--vc-divider);
 }
 
+/* 不少文档用 --- 切分章节，分隔线紧贴下一个二级标题。
+ * 这时 hr 的线会和 h2 的上边框落在同一个边界上，看起来像被划了两道。
+ * 相邻时只保留 h2 的整行线：章节标志在全文保持一致，
+ * hr 的线与间距一并收掉，章节间隔回到 --vc-h2-gap 的节奏。
+ * Typora 把分隔线包在 .md-hr 里，包装层才是 h2 的兄弟节点；
+ * 没有包装的 <hr> 由第二个选择器照顾，导出 HTML 也能命中。
+ * 用 margin / border 归零而不是 display: none，元素仍留在文档流里；
+ * 不支持 :has() 的宿主会退回双线，只是观感，不影响阅读。 */
+#write .md-hr:has(+ h2) > hr,
+#write hr:has(+ h2) {
+  margin: 0;
+  border: 0;
+}
+
 #write mark {
   color: var(--vc-mark-text);
   background: var(--vc-mark-bg);
