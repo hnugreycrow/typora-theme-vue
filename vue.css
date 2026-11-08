@@ -53,12 +53,17 @@
   --vc-code-selection: #333b46;
   --vc-code-gutter-border: #444d56;
 
-  /* 阅读宽度与字体。 */
-  --vc-content-width: 800px;
+  /* 阅读宽度与字体；page-pad 也是表格向外借白的上限。
+   * 栏宽用 em 表达，锁定的是每行字数而不是像素：42em 在 16px 下约 41 个
+   * 汉字，改字号时每行字数不变。总宽 = 正文栏 + 两侧内边距。 */
+  --vc-measure: 42em;
+  --vc-page-pad: 40px;
+  --vc-content-width: calc(var(--vc-measure) + var(--vc-page-pad) * 2);
 
   /* 排版节奏：在官网 .vt-doc 的比例上略收紧。官网的 h2 是 4rem + 1.8rem，
-   * 在连续滚动的编辑器里会显得空。想整体放松或收紧时只改这几个值。 */
-  --vc-leading: 1.7;
+   * 在连续滚动的编辑器里会显得空。想整体放松或收紧时只改这几个值。
+   * 行高比官网低一档：42em 的行长偏短，1.7 会显得松。 */
+  --vc-leading: 1.65;
   --vc-paragraph-gap: 16px;
   --vc-h2-gap: 3rem;
   --vc-h2-pad: 1.5rem;
@@ -127,7 +132,7 @@ body {
   width: 100%;
   max-width: var(--vc-content-width);
   margin: 0 auto;
-  padding: 52px 40px 120px;
+  padding: 52px var(--vc-page-pad) 120px;
   overflow-wrap: break-word;
   caret-color: var(--vc-green);
 }
@@ -359,7 +364,11 @@ body {
   margin-top: 0.5em;
 }
 
-/* 利用正文两侧的内边距，不依据视口宽度扩展，避免侵入侧栏。
+/* 默认与正文同宽：表格的边框和正文、代码块共用一条左边缘。
+ * 早先所有表格都外扩 16px，这个幅度刚好能看出偏移、又不够明显，
+ * 读者只会觉得没有对齐，所以普通表格回到正文宽度。
+ * 只有五列及以上的顶层表格才向两侧借用留白：这种表格确实需要宽度，
+ * 并且借得足够多，读者会把它理解成“宽表格”而不是排版偏差。
  * 只扩大顶层表格；引用和列表中的表格保持原宽度。
  * 滚动放在 Typora 的表格容器上，保留原生表格布局。 */
 @media screen {
@@ -368,17 +377,21 @@ body {
     overflow-x: auto;
   }
 
-  #write > .md-table-fig {
-    width: calc(100% + 32px);
+  /* 不支持 :has() 的版本保持同宽，属可接受的降级。
+   * 外扩不超过正文的水平内边距，窄窗口下表格不会溢出编辑区。 */
+  #write > .md-table-fig:has(> table:not(.md-reset) > thead > tr > :nth-child(5)) {
+    --vc-table-outset: min(32px, var(--vc-page-pad));
+    width: calc(100% + var(--vc-table-outset) * 2);
+    /* 必须解除上面的 max-width，否则 width 会被压回 100%。 */
     max-width: none;
-    margin-left: -16px;
-    margin-right: -16px;
+    margin-left: calc(-1 * var(--vc-table-outset));
+    margin-right: calc(-1 * var(--vc-table-outset));
   }
 }
 
-/* 六列以上的顶层表格按实际编辑区域扩展，每侧最多借用 64px。
- * 命名容器限定在 Typora 内，避免导出页面将 cqw 回退为视口宽度。
- * 不支持容器查询的版本继续使用上面的 16px 扩展。 */
+/* 编辑区域够宽时按实际空间放宽，每侧最多借用 64px；
+ * 上限内缩 24px，表格边缘不会贴住侧栏。
+ * 命名容器限定在 Typora 内，避免导出页面将 cqw 回退为视口宽度。 */
 @supports (container-type: inline-size) {
   @media screen {
     content {
@@ -389,12 +402,13 @@ body {
     @container vc-editor (min-width: 0px) {
       #write
         > .md-table-fig:has(
-          > table:not(.md-reset) > thead > tr > :nth-child(6)
+          > table:not(.md-reset) > thead > tr > :nth-child(5)
         ) {
-        --vc-table-outset: clamp(16px, calc((100cqw - 100%) / 2 - 24px), 64px);
-        width: calc(100% + var(--vc-table-outset) * 2);
-        margin-left: calc(-1 * var(--vc-table-outset));
-        margin-right: calc(-1 * var(--vc-table-outset));
+        --vc-table-outset: clamp(
+          min(32px, var(--vc-page-pad)),
+          calc((100cqw - 100%) / 2 - 24px),
+          64px
+        );
       }
     }
   }
@@ -1367,8 +1381,13 @@ body {
  * ========================================================================== */
 
 @media screen and (max-width: 800px) {
+  /* 窄窗口收回水平留白，表格外扩的上限随之降到 24px。 */
+  :root {
+    --vc-page-pad: 24px;
+  }
+
   #write {
-    padding: 32px 24px 80px;
+    padding: 32px var(--vc-page-pad) 80px;
   }
 
   #write h1 {
