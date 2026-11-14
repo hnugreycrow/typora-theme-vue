@@ -167,9 +167,9 @@ body {
 
 #write h2 {
   font-size: 1.5rem;
-  border-top: 1px solid var(--vc-border);
   margin: var(--vc-h2-gap) 0 var(--vc-h2-pad);
-  padding-top: var(--vc-h2-pad);
+  padding-bottom: 0.4em;
+  border-bottom: 1px solid var(--vc-border);
 }
 
 #write h3 {
@@ -193,11 +193,6 @@ body {
 /* 首个块级元素贴住顶部：文档标题（h1）不再额外留白。 */
 #write > :first-child {
   margin-top: 0;
-}
-
-#write > h2:first-child {
-  border-top: 0;
-  padding-top: 0;
 }
 
 #write h2 + h3,
@@ -278,26 +273,18 @@ body {
   margin: 12px 0;
 }
 
-/* 与 h2 的上边框区分：h2 用整行细线标章节，hr 用居中短线标内容断点。 */
 #write hr {
-  width: 96px;
-  margin: 2.5rem auto;
+  width: 100%;
+  margin: 1.75rem 0;
   border: 0;
   border-top: 1px solid var(--vc-divider);
 }
 
-/* 不少文档用 --- 切分章节，分隔线紧贴下一个二级标题。
- * 这时 hr 的线会和 h2 的上边框落在同一个边界上，看起来像被划了两道。
- * 相邻时只保留 h2 的整行线：章节标志在全文保持一致，
- * hr 的线与间距一并收掉，章节间隔回到 --vc-h2-gap 的节奏。
- * Typora 把分隔线包在 .md-hr 里，包装层才是 h2 的兄弟节点；
- * 没有包装的 <hr> 由第二个选择器照顾，导出 HTML 也能命中。
- * 用 margin / border 归零而不是 display: none，元素仍留在文档流里；
- * 不支持 :has() 的宿主会退回双线，只是观感，不影响阅读。 */
-#write .md-hr:has(+ h2) > hr,
-#write hr:has(+ h2) {
-  margin: 0;
-  border: 0;
+/* 紧跟标题时，标题那 3rem 上边距会压过线的下边距（margin 塌陷取大值），
+ * 这里对齐成一档，线的上下才对称。 */
+#write .md-hr + h2,
+#write hr + h2 {
+  margin-top: 1.75rem;
 }
 
 #write mark {
@@ -1405,7 +1392,6 @@ body {
 
   #write h2 {
     margin-top: 48px;
-    padding-top: 24px;
   }
 
   #write .md-fences:not(.md-fences-advanced),
@@ -1449,7 +1435,6 @@ body {
 
   #write h2 {
     margin-top: 28px;
-    padding-top: 16px;
   }
 
   #write p {
