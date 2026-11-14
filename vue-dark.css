@@ -61,15 +61,15 @@
   /* 阅读宽度与字体；page-pad 也是表格向外借白的上限。
    * 栏宽用 em 表达，锁定的是每行字数而不是像素：42em 在 16px 下约 41 个
    * 汉字，改字号时每行字数不变。总宽 = 正文栏 + 两侧内边距。 */
-  --vc-measure: 42em;
+  --vc-measure: 43em;
   --vc-page-pad: 40px;
   --vc-content-width: calc(var(--vc-measure) + var(--vc-page-pad) * 2);
 
   /* 排版节奏：在官网 .vt-doc 的比例上略收紧。官网的 h2 是 4rem + 1.8rem，
    * 在连续滚动的编辑器里会显得空。想整体放松或收紧时只改这几个值。
-   * 行高比官网低一档：42em 的行长偏短，1.7 会显得松。 */
-  --vc-leading: 1.65;
-  --vc-paragraph-gap: 16px;
+   */
+  --vc-leading: 1.7;
+  --vc-paragraph-gap: 19.2px;
   --vc-h2-gap: 3rem;
   --vc-h2-pad: 1.5rem;
   --vc-h3-gap: 2.5rem;
@@ -243,7 +243,7 @@ body {
 
 #write li > ul,
 #write li > ol {
-  margin: 4px 0;
+  margin: 8px 0;
 }
 
 #write li::marker {
