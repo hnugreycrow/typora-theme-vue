@@ -1025,7 +1025,7 @@ body {
 }
 
 #file-library-tree .fa-caret-down:before {
-  content: "\f107"; /* 向下箭头。 */
+  content: "\f105"; /* 与右箭头共用字形，靠容器旋转区分方向。 */
 }
 
 #file-library-tree .fa-caret-right:before {
@@ -1045,31 +1045,70 @@ body {
   content: "\f115";
 }
 
-/* 子项作为整体同步淡入，不逐项延迟，也不影响展开后的点击。 */
-#file-library-tree .file-node-expanded > .file-node-children {
-  animation: vue-directory-expand 180ms ease-out;
+/*
+ * 节点展开：160ms 的轻微淡入 + 2px 位移，不做逐行阶梯。
+ * 动效刻意保持克制：重播（切标签页、树重绘）时几乎不可见。
+ */
+@keyframes vue-tree-content-in {
+  from {
+    transform: translate3d(-2px, 0, 0);
+  }
+
+  to {
+    transform: none;
+  }
 }
 
-@keyframes vue-directory-expand {
+@keyframes vue-tree-title-in {
   from {
-    opacity: 0.65;
-    transform: translateY(-2px);
+    opacity: 0;
   }
+
   to {
     opacity: 1;
-    transform: translateY(0);
   }
+}
+
+#file-library-tree
+  .file-tree-node.file-node-expanded
+  > .file-node-children
+  > .file-tree-node
+  > .file-node-content {
+  animation: vue-tree-content-in 160ms ease-out both;
+}
+
+#file-library-tree
+  .file-tree-node.file-node-expanded
+  > .file-node-children
+  > .file-tree-node
+  > .file-node-content
+  > .file-node-title {
+  animation: vue-tree-title-in 160ms ease-out both;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #file-library-tree .file-node-expanded > .file-node-children {
-    animation: none;
+  #file-library-tree .file-node-content,
+  #file-library-tree .file-node-content > .file-node-title {
+    animation: none !important;
+  }
+
+  #file-library-tree .file-node-open-state {
+    transition: none;
   }
 }
 
 .file-node-open-state {
   padding: 2px;
   margin-right: 8px;
+  transition: transform 160ms ease-out;
+}
+
+/* 展开时整枚箭头旋转 90°，收起时转回。 */
+#file-library-tree
+  .file-node-expanded
+  > .file-node-content
+  .file-node-open-state {
+  transform: rotate(90deg);
 }
 
 /* 文件节点不需要展开箭头，移除 Typora 保留的空占位。 */
