@@ -15,6 +15,8 @@
   --text-color: #213547;
   --font-color: #213547;
   --vc-muted: #3c3c3cb3;
+  /* YAML 元数据正文：比 --vc-muted 实一点，小字号下更可读。 */
+  --vc-meta-text: #5b6470;
   --vc-divider: #3c3c3c4a;
   --vc-border: #3c3c3c1f;
   --vc-soft: #f9f9f9;
@@ -736,12 +738,27 @@ body {
   font: 0.875rem/1.75 var(--monospace);
 }
 
+/* YAML 元数据：轻卡片 + 左侧绿条；Typora 只给纯文本，做不了键值着色。 */
 #write .md-meta-block {
-  color: var(--vc-muted);
+  margin: 0 0 1.25rem;
+  padding: 14px 16px;
+  color: var(--vc-meta-text);
   background: var(--vc-soft);
-  padding: 16px 20px;
-  border-radius: 6px;
-  font: 0.875rem/1.7 var(--monospace);
+  border: 1px solid var(--vc-border);
+  border-left: 3px solid var(--vc-green);
+  border-radius: 8px;
+  font: 0.8125rem/1.7 var(--monospace);
+  font-variant-ligatures: none;
+  letter-spacing: 0.01em;
+  overflow-wrap: anywhere;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease;
+}
+
+#write .md-meta-block.md-focus {
+  border-color: var(--vc-green);
+  background: var(--bg-color);
 }
 
 .md-inline-math,
