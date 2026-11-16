@@ -1354,13 +1354,21 @@ body {
   display: inline !important;
 }
 
+/* 图标继承侧栏文字色，不再叠加 opacity，避免与半透明文字色相乘。 */
 .file-node-icon {
-  opacity: 0.65;
   margin-right: 8px;
 }
 
+/* 只隐去最常见的 .md/.markdown；其他类型保留后缀，兼容“所有文件”模式。 */
 .file-node-title-ext-part {
   display: none !important;
+}
+
+.file-library-node[data-is-directory="false"]:not([data-path$=".md" i]):not(
+    [data-path$=".markdown" i]
+  )
+  .file-node-title-ext-part {
+  display: inline !important;
 }
 
 /* 清除 Typora 节点背景，仅高亮鼠标所在行。 */
@@ -1385,7 +1393,6 @@ body {
   > .file-node-content
   .file-node-icon {
   color: var(--vc-green);
-  opacity: 1;
 }
 
 /* 激活靠绿色与字重区分，悬停统一使用浅灰背景。 */
