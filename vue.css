@@ -88,6 +88,9 @@
   --vc-sidebar-hover: var(--vc-mute);
   --control-text-color: var(--vc-muted);
   --control-text-hover-color: var(--text-color);
+  /* 标题层级徽标：h3–h6 聚焦时由 Typora 原生画在标题左侧，
+   * 宿主默认 #ddd，白底上等于看不见；边框用的是 currentColor，会一起变。 */
+  --heading-char-color: #6b7280;
   --active-file-border-color: transparent;
   --item-hover-bg-color: var(--vc-soft);
   --item-hover-text-color: var(--text-color);
@@ -207,6 +210,18 @@ body {
 #write h4 + h5,
 #write h5 + h6 {
   margin-top: 22px;
+}
+
+/* 宿主给 h3–h6 的聚焦徽标只有 9px，换成中灰后仍偏小，放大一档、收紧内边距。
+ * 层级、位置、边框全部沿用宿主实现，h1/h2 宿主本来就没有徽标，这里也不碰。 */
+@media screen {
+  #write h3.md-focus::before,
+  #write h4.md-focus::before,
+  #write h5.md-focus::before,
+  #write h6.md-focus::before {
+    font-size: 10px;
+    padding: 1px 4px;
+  }
 }
 
 #write strong {
