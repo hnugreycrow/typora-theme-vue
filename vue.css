@@ -242,8 +242,15 @@ body {
   margin: 8px 0;
 }
 
+/* 圆点是装饰，编号是信息：无序列表保持灰点，有序列表的序号提一档，
+ * 读者指着“第 4 步”时必须一眼找到。数字用等宽字形，两位数不会把正文左边缘推歪。 */
 #write li::marker {
   color: var(--vc-muted);
+}
+
+#write ol > li::marker {
+  color: var(--vc-meta-text);
+  font-variant-numeric: tabular-nums;
 }
 
 #write .md-task-list-item > input {
