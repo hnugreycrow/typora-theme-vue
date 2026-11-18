@@ -90,7 +90,7 @@
   --side-bar-bg-color: var(--bg-color);
   --vc-sidebar-text: var(--vc-muted);
   --vc-sidebar-active: transparent;
-  --vc-sidebar-hover: var(--vc-soft);
+  --vc-sidebar-hover: var(--vc-mute);
   --control-text-color: var(--vc-muted);
   --control-text-hover-color: var(--text-color);
   --active-file-bg-color: #333333;
@@ -1421,9 +1421,24 @@ body {
 }
 
 .file-library-node.file-library-file-node.active > .file-node-content {
+  position: relative;
   background: var(--vc-sidebar-active);
   color: var(--vc-green);
   font-weight: 600;
+}
+
+/* 当前文件在行首补一条 2px 绿边：白底上只靠字色和字重，扫一眼定位太慢。
+ * 竖条与引用、提示块同源；只标一行，不必给整行铺绿。 */
+.file-library-node.file-library-file-node.active
+  > .file-node-content::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--vc-green);
 }
 
 .file-library-node.file-library-file-node.active
