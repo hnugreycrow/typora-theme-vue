@@ -23,6 +23,11 @@
   --vc-mute: #2f2f2f;
   /* 浮层底色与浅色主题同名，取值沿用原来的 --vc-soft。 */
   --vc-surface: #242424;
+  /* 引用块：深色下沿用 --vc-soft，与代码块同底，靠描边和竖条分层；
+   * 竖条提高透明度，绿在深底上才立得住。 */
+  --vc-quote-bg: var(--vc-soft);
+  --vc-quote-bar: rgba(66, 184, 131, 0.55);
+  --vc-quote-text: #c7c7c7;
   --vc-inline-code: #aac8e4;
   --vc-mark-bg: #594600;
   --vc-mark-text: #ffe417;
@@ -257,15 +262,21 @@ body {
 }
 
 /* 引用、分隔线与文本标记。 */
+/* 引用做成完整的卡片：四角同圆、1px 描边加 3px 品牌绿竖条。
+ * 早先只有右侧圆角、竖条用分隔线色，既不像强调也不像描边，读起来像左边
+ * 少了一条边；现在竖条带一点链接绿，和正文的细线区分得开。
+ * 字号回到 15px、字重 400：14px 配 500 会让中文又小又重，比正文更难读。 */
 #write blockquote {
-  margin: 24px 0;
-  padding: 14px 20px;
-  color: var(--vc-muted);
-  background: var(--vc-soft);
-  border-left: 3px solid var(--vc-divider);
-  border-radius: 0 8px 8px 0;
-  font-size: 0.875rem;
-  font-weight: 500;
+  margin: 26px 0;
+  padding: 15px 20px 15px 18px;
+  color: var(--vc-quote-text);
+  background: var(--vc-quote-bg);
+  border: 1px solid var(--vc-border);
+  border-left: 3px solid var(--vc-quote-bar);
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.65;
 }
 
 #write blockquote > :first-child {
@@ -276,9 +287,19 @@ body {
   margin-bottom: 0;
 }
 
+/* 段落自己声明了正文行高，会盖掉引用的 1.65，这里收回到继承。 */
+#write blockquote p,
+#write blockquote li {
+  line-height: inherit;
+}
+
+/* 嵌套引用沿用外层的圆角，竖条退回中性色、收窄到 1px：
+ * 两层绿条叠在一起会互相削弱，里层只需要和底色分得开。 */
 #write blockquote blockquote {
+  margin: 16px 0;
+  padding: 13px 16px;
   background: var(--vc-mute);
-  margin: 12px 0;
+  border-left: 1px solid var(--vc-divider);
 }
 
 /* 深色下引用与代码块同为 #242424；屏幕内把引用里的代码块压暗一档，
@@ -1624,6 +1645,10 @@ body {
     --vc-border: #3c3c3c1f;
     --text-color: #222;
     --vc-muted: #555;
+    /* 打印回到浅色引用：卡片底色、竖条与正文色都与浅色主题一致。 */
+    --vc-quote-bg: #f7f8f8;
+    --vc-quote-bar: rgba(66, 184, 131, 0.6);
+    --vc-quote-text: #4b5563;
     --vc-code-bg: #f6f6f7;
     --vc-code-text: #222;
     --vc-code-comment: #555;
