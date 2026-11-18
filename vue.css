@@ -263,18 +263,17 @@ body {
 }
 
 /* 引用、分隔线与文本标记。 */
-/* 引用做成完整的卡片：四角同圆、1px 描边加 3px 品牌绿竖条。
- * 早先只有右侧圆角、竖条用分隔线色，既不像强调也不像描边，读起来像左边
- * 少了一条边；现在竖条带一点链接绿，和正文的细线区分得开。
+/* 引用做成卡片：右侧圆角、左侧直角，竖条贴在直边上。
+ * 早先竖条用分隔线色，既不像强调也不像描边，读起来像左边少了一条边；
+ * 现在竖条带一点链接绿，和正文的细线区分得开。
  * 字号回到 15px、字重 400：14px 配 500 会让中文又小又重，比正文更难读。 */
 #write blockquote {
-  margin: 26px 0;
   padding: 15px 20px 15px 18px;
   color: var(--vc-quote-text);
   background: var(--vc-quote-bg);
   border: 1px solid var(--vc-border);
   border-left: 3px solid var(--vc-quote-bar);
-  border-radius: 8px;
+  border-radius: 0 8px 8px 0;
   font-size: 0.9375rem;
   font-weight: 400;
   line-height: 1.65;
