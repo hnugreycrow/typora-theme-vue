@@ -340,19 +340,29 @@ body {
   font-size: 0.9375rem;
 }
 
+/* 单元格下限决定表格的不可压缩宽度，也就是滚动条的触发点。
+ * 2.5em 只有 37.5px，九列表格会被压到每列三四个字，读者要靠纵向扫读才能
+ * 把一行连起来；这种宽度下横向滚动反而更好读，所以抬到 5em（15px 字号下
+ * 75px，约五个汉字）。加上内边距与边框，一列最小 96px：816px 的外扩上限
+ * 正好容下八列，九列起必然出现滚动条。 */
 #write th:not(.md-reset),
 #write td:not(.md-reset) {
-  min-width: 2.5em;
+  min-width: 5em;
   padding: 8px 10px;
   border: 1px solid var(--vc-divider);
   vertical-align: top;
   line-height: 1.55;
+  /* 表格里的数字按等宽字形排，位数相同的数字才对得齐。 */
+  font-variant-numeric: tabular-nums;
   word-break: normal;
   overflow-wrap: anywhere;
 }
 
+/* 表头不强制单行：一个长表头会把整张表撑到滚动，而它折成两行往往更好。
+ * balance 让两行长度接近，不会断成“分布式”+“事务”这种一头沉；
+ * 不支持时退回普通折行。 */
 #write th:not(.md-reset) {
-  white-space: nowrap;
+  text-wrap: balance;
   background: var(--vc-soft);
   font-weight: 600;
 }
