@@ -90,7 +90,9 @@
   --primary-color: var(--vc-green);
   --side-bar-bg-color: var(--bg-color);
   --vc-sidebar-text: var(--vc-muted);
-  --vc-sidebar-active: var(--vc-mute);
+  --vc-sidebar-active: transparent;
+  /* 深色底上 #42b883 对比度已足够，保留 Vue 官网侧栏的无底色清透感。 */
+  --vc-sidebar-active-text: var(--vc-green);
   --vc-sidebar-hover: var(--vc-mute);
   --control-text-color: var(--vc-muted);
   --control-text-hover-color: var(--text-color);
@@ -1090,8 +1092,8 @@ body {
 .active-tab-outline #info-panel-tab-outline:hover,
 .ty-show-search #info-panel-tab-search,
 .ty-show-search #info-panel-tab-search:hover {
-  color: var(--vc-green);
-  font-weight: 600;
+  color: var(--vc-sidebar-active-text);
+  font-weight: 500;
   background: transparent;
   border: none;
   box-shadow: inset 0 -2px 0 var(--vc-green);
@@ -1128,7 +1130,8 @@ body {
 
 .file-list-item.active {
   background: var(--vc-sidebar-active);
-  color: var(--text-color);
+  color: var(--vc-sidebar-active-text);
+  font-weight: 500;
 }
 
 .file-list-item.active:hover {
@@ -1426,20 +1429,21 @@ body {
   background: var(--vc-sidebar-hover);
 }
 
-/* 当前文件使用轻灰圆角底色与亮色字重，不额外叠加绿色或竖条，保持写作器侧栏的安静克制。 */
+/* 沿用 vuejs.org 侧栏风格：无底色、无竖条，保持 500 字重避免加粗抖动，靠品牌绿区分当前文件。 */
 .file-library-node.file-library-file-node.active > .file-node-content {
   background: var(--vc-sidebar-active);
-  color: var(--text-color);
+  color: var(--vc-sidebar-active-text);
+  font-weight: 500;
 }
 
 .file-library-node.file-library-file-node.active
   > .file-node-content
   .file-node-icon {
-  color: var(--text-color);
+  color: var(--vc-sidebar-active-text);
 }
 
 .file-library-node.file-library-file-node.active > .file-node-content:hover {
-  background: var(--vc-sidebar-active);
+  background: var(--vc-sidebar-hover);
 }
 
 #file-library-tree > .file-tree-node.file-node-root > .file-node-content {
@@ -1452,7 +1456,7 @@ body {
   background: transparent;
 }
 
-/* 大纲：保留宿主缩进，激活项通过绿色与字重区分。 */
+/* 大纲：保留宿主缩进，激活项通过品牌绿与轻量字重区分。 */
 .outline-item {
   color: var(--vc-sidebar-text);
   font-size: 14px;
@@ -1465,8 +1469,9 @@ body {
 }
 
 .outline-item.outline-item-active {
-  color: var(--vc-green);
-  background: transparent;
+  color: var(--vc-sidebar-active-text);
+  background: var(--vc-sidebar-active);
+  font-weight: 500;
 }
 
 .outline-item.outline-item-active:hover {
