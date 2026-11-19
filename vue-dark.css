@@ -25,6 +25,12 @@
   --vc-mute: #2f2f2f;
   /* 浮层底色与浅色主题同名，取值沿用原来的 --vc-soft。 */
   --vc-surface: #242424;
+  /* 表格配色：表头沿用 --vc-soft 与页面底拉开层级，表体保持深底去斑马纹，
+   * 仅保留轻横线与表头淡竖线，减少网格噪声。 */
+  --vc-table-head-bg: var(--vc-soft);
+  --vc-table-head-code-bg: rgba(255, 255, 255, 0.08);
+  --vc-table-row-border: #54545447;
+  --vc-table-row-hover: rgba(255, 255, 255, 0.025);
   /* 引用块：深色下沿用 --vc-soft，与代码块同底，靠描边和竖条分层；
    * 竖条提高透明度，绿在深底上才立得住。 */
   --vc-quote-bg: var(--vc-soft);
@@ -376,26 +382,37 @@ body {
 }
 
 /* 表格、图片、目录与脚注。 */
-/* md-reset 标记 Typora 内置控件，避免正文表格样式污染调整表格网格。 */
+/* md-reset 标记 Typora 内置控件，避免正文表格样式污染调整表格网格。
+ * 改用 separate + border-spacing: 0 承接 8px 圆角外框，与引用、代码块视觉一致；
+ * 表体去斑马纹与竖线，靠留白和轻横线引导横向扫读。 */
 #write table:not(.md-reset) {
+  box-sizing: border-box;
   width: 100%;
   table-layout: auto;
-  border-collapse: collapse;
+  border-collapse: separate;
   border-spacing: 0;
+  border: 1px solid var(--vc-border);
+  border-radius: 8px;
+  background: var(--bg-color);
   font-size: 0.9375rem;
 }
 
+#write table:not(.md-reset) tr:not(.md-reset) {
+  background: transparent;
+}
+
 /* 单元格下限决定表格的不可压缩宽度，也就是滚动条的触发点。
- * 2.5em 只有 37.5px，九列表格会被压到每列三四个字，读者要靠纵向扫读才能
- * 把一行连起来；这种宽度下横向滚动反而更好读，所以抬到 5em（15px 字号下
- * 75px，约五个汉字）。加上内边距与边框，一列最小 96px：864px 的外扩上限
- * 正好容下九列，十列起必然出现滚动条。 */
+ * 显式 border-box：7.5em（15px 字号下 112.5px）扣除左右 32px 内边距后
+ * 仍有约 80px（五个汉字）内容宽；六列长表头仍在 800px 外扩宽度内折行不滚动，
+ * 七列起随编辑区铺满，超出整屏后再触发横向滚动，不会把短列压碎。 */
 #write th:not(.md-reset),
 #write td:not(.md-reset) {
-  min-width: 5em;
-  padding: 8px 10px;
-  border: 1px solid var(--vc-divider);
-  vertical-align: top;
+  box-sizing: border-box;
+  min-width: 7.5em;
+  padding: 11px 16px;
+  border: 0;
+  border-bottom: 1px solid var(--vc-table-row-border);
+  vertical-align: middle;
   line-height: 1.55;
   /* 表格里的数字按等宽字形排，位数相同的数字才对得齐。 */
   font-variant-numeric: tabular-nums;
@@ -403,17 +420,49 @@ body {
   overflow-wrap: anywhere;
 }
 
-/* 表头不强制单行：一个长表头会把整张表撑到滚动，而它折成两行往往更好。
- * balance 让两行长度接近，不会断成“分布式”+“事务”这种一头沉；
- * 不支持时退回普通折行。 */
+/* 表头不强制单行：长中文表头折成长度接近的两行，短标识符由下方 code 规则护住不劈断。 */
 #write th:not(.md-reset) {
+  padding: 12px 16px;
   text-wrap: balance;
-  background: var(--vc-soft);
+  background: var(--vc-table-head-bg);
+  border-bottom-color: var(--vc-border);
   font-weight: 600;
 }
 
-#write tr:not(.md-reset):nth-child(even) > td:not(.md-reset) {
-  background: var(--vc-soft);
+#write th:not(.md-reset):not(:last-child) {
+  border-right: 1px solid var(--vc-table-row-border);
+}
+
+#write table:not(.md-reset) > tbody > tr:last-child > td:not(.md-reset) {
+  border-bottom: 0;
+}
+
+/* 四个角单元格随外框圆角内缩 1px，避免表头底色和行悬停底色顶出圆角。 */
+#write table:not(.md-reset) > thead > tr:first-child > th:first-child {
+  border-top-left-radius: 7px;
+}
+
+#write table:not(.md-reset) > thead > tr:first-child > th:last-child {
+  border-top-right-radius: 7px;
+}
+
+#write table:not(.md-reset) > tbody > tr:last-child > td:first-child {
+  border-bottom-left-radius: 7px;
+}
+
+#write table:not(.md-reset) > tbody > tr:last-child > td:last-child {
+  border-bottom-right-radius: 7px;
+}
+
+/* 表格内的行内代码多为指标名或短表达式，保持单行不劈断；
+ * 表头灰底上略加深代码底色，保持轻巧的层次区分。 */
+#write th:not(.md-reset) code,
+#write td:not(.md-reset) code {
+  white-space: nowrap;
+}
+
+#write th:not(.md-reset) code {
+  background: var(--vc-table-head-code-bg);
 }
 
 /* 单元格内段落沿用紧凑行距，保留多段内容的间隔。 */
@@ -436,6 +485,10 @@ body {
  * 只扩大顶层表格；引用和列表中的表格保持原宽度。
  * 滚动放在 Typora 的表格容器上，保留原生表格布局。 */
 @media screen {
+  #write table:not(.md-reset) > tbody > tr:not(.md-reset):hover > td:not(.md-reset) {
+    background: var(--vc-table-row-hover);
+  }
+
   #write .md-table-fig {
     max-width: 100%;
     overflow-x: auto;
@@ -453,8 +506,9 @@ body {
   }
 }
 
-/* 编辑区域够宽时按实际空间放宽，每侧最多借用 64px；
- * 上限内缩 24px，表格边缘不会贴住侧栏。
+/* 编辑区域够宽时按列数分档放宽，左右至少内缩 24px，表格边缘不会贴住侧栏：
+ * - 五至六列：每侧最多借用 64px，舒展但不会被拉散；
+ * - 七列及以上：解除 64px 封顶，随编辑区实际宽度铺开，尽量减少横向滚动。
  * 命名容器限定在 Typora 内，避免导出页面将 cqw 回退为视口宽度。 */
 @supports (container-type: inline-size) {
   @media screen {
@@ -472,6 +526,16 @@ body {
           min(32px, var(--vc-page-pad)),
           calc((100cqw - 100%) / 2 - 24px),
           64px
+        );
+      }
+
+      #write
+        > .md-table-fig:has(
+          > table:not(.md-reset) > thead > tr > :nth-child(7)
+        ) {
+        --vc-table-outset: max(
+          min(32px, var(--vc-page-pad)),
+          calc((100cqw - 100%) / 2 - 24px)
         );
       }
     }
@@ -1659,6 +1723,10 @@ body {
     --vc-divider: #3c3c3c4a;
     --vc-border: #3c3c3c1f;
     --vc-h2-border: #3c3c3c33;
+    --vc-table-head-bg: #f4f5f6;
+    --vc-table-head-code-bg: rgba(60, 60, 60, 0.07);
+    --vc-table-row-border: #3c3c3c14;
+    --vc-table-row-hover: #f9fafb;
     --text-color: #222;
     --vc-muted: #555;
     /* 打印回到浅色引用：卡片底色、竖条与正文色都与浅色主题一致。 */
@@ -1698,7 +1766,7 @@ body {
     widows: 3;
   }
 
-  /* 长表可跨页；打印时解除短表头的单行限制。 */
+  /* 长表可跨页；打印时解除列宽下限与表内代码的单行限制，并收紧内边距。 */
   #write table:not(.md-reset) {
     break-inside: auto;
   }
@@ -1706,6 +1774,12 @@ body {
   #write th:not(.md-reset),
   #write td:not(.md-reset) {
     min-width: 0;
+    padding: 8px 10px;
+    white-space: normal;
+  }
+
+  #write th:not(.md-reset) code,
+  #write td:not(.md-reset) code {
     white-space: normal;
   }
 
