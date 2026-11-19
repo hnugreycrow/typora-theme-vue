@@ -86,7 +86,7 @@
   --primary-color: var(--vc-green);
   --side-bar-bg-color: var(--bg-color);
   --vc-sidebar-text: var(--vc-muted);
-  --vc-sidebar-active: transparent;
+  --vc-sidebar-active: var(--vc-mute);
   --vc-sidebar-hover: var(--vc-mute);
   --control-text-color: var(--vc-muted);
   --control-text-hover-color: var(--text-color);
@@ -1002,16 +1002,11 @@ body {
 
 .file-list-item.active {
   background: var(--vc-sidebar-active);
-  color: var(--vc-green);
-  font-weight: 600;
+  color: var(--text-color);
 }
 
 .file-list-item.active:hover {
   background: var(--vc-sidebar-hover);
-}
-
-.file-list-item.active .file-list-item-file-name {
-  font-weight: 600;
 }
 
 .file-list-item-file-name {
@@ -1205,7 +1200,6 @@ body {
   min-width: 16px !important;
   max-width: 16px !important;
   height: 16px;
-  margin: 0 8px 0 0 !important;
   padding: 0 !important;
   box-sizing: border-box;
   line-height: 1;
@@ -1281,11 +1275,6 @@ body {
   display: inline !important;
 }
 
-/* 图标继承侧栏文字色，不再叠加 opacity，避免与半透明文字色相乘。 */
-.file-node-icon {
-  margin-right: 8px;
-}
-
 /* 只隐去最常见的 .md/.markdown；其他类型保留后缀，兼容“所有文件”模式。 */
 .file-node-title-ext-part {
   display: none !important;
@@ -1310,36 +1299,20 @@ body {
   background: var(--vc-sidebar-hover);
 }
 
+/* 当前文件使用轻灰圆角底色与深色字重，不额外叠加绿色或竖条，保持写作器侧栏的安静克制。 */
 .file-library-node.file-library-file-node.active > .file-node-content {
-  position: relative;
   background: var(--vc-sidebar-active);
-  color: var(--vc-green);
-  font-weight: 600;
-}
-
-/* 当前文件在行首补一条 2px 绿边：白底上只靠字色和字重，扫一眼定位太慢。
- * 竖条与引用、提示块同源；只标一行，不必给整行铺绿。 */
-.file-library-node.file-library-file-node.active
-  > .file-node-content::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 6px;
-  bottom: 6px;
-  width: 2px;
-  border-radius: 2px;
-  background: var(--vc-green);
+  color: var(--text-color);
 }
 
 .file-library-node.file-library-file-node.active
   > .file-node-content
   .file-node-icon {
-  color: var(--vc-green);
+  color: var(--text-color);
 }
 
-/* 激活靠绿色与字重区分，悬停统一使用浅灰背景。 */
 .file-library-node.file-library-file-node.active > .file-node-content:hover {
-  background: var(--vc-sidebar-hover);
+  background: var(--vc-sidebar-active);
 }
 
 #file-library-tree > .file-tree-node.file-node-root > .file-node-content {
@@ -1366,8 +1339,7 @@ body {
 
 .outline-item.outline-item-active {
   color: var(--vc-green);
-  background: var(--vc-sidebar-active);
-  font-weight: 600;
+  background: transparent;
 }
 
 .outline-item.outline-item-active:hover {
