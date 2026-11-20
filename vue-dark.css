@@ -87,10 +87,15 @@
   --vc-h2-gap: 2.75rem;
   --vc-h2-pad: 1rem;
   --vc-h3-gap: 2rem;
+  /* 西文字体在前、中文字体在后，中英混排时数字与英文更利落；
+   * system-ui 放在显式中文字体之后，避免中文 Windows 抢先回退到微软雅黑而盖掉已装的现代黑体。 */
   --vc-font:
-    "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
-  --monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "HarmonyOS Sans SC", "MiSans", "Noto Sans SC", "Source Han Sans SC",
+    "Microsoft YaHei", system-ui, sans-serif;
+  --monospace:
+    "JetBrains Mono", "Cascadia Mono", "SFMono-Regular", Menlo, Consolas,
+    "Liberation Mono", monospace;
 
   /* Typora 控件与侧栏变量。 */
   --primary-color: var(--vc-green);
